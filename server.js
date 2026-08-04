@@ -36,10 +36,6 @@ function safeText(value, limit = 1024) {
   return String(value).slice(0, limit);
 }
 
-function padNumber(n) {
-  return String(n).padStart(2, "0");
-}
-
 async function getNextRecruitChannelName(guild) {
   const channels = guild.channels.cache.filter(
     ch => ch.type === ChannelType.GuildText && ch.parentId === RECRUIT_CATEGORY_ID
@@ -58,19 +54,32 @@ async function getNextRecruitChannelName(guild) {
   return `recrutement-${maxNum + 1}`;
 }
 
-async function sendDecisionDM(userId, accepted, poste) {
-  try {
-    const user = await discordClient.users.fetch(userId);
-    await user.send(
-      accepted
-        ? `✅ Félicitations, ta candidature pour **${poste}** a été **acceptée**. Merci de prendre contact avec le staff.`
-        : `❌ Ta candidature pour **${poste}** a été **refusée**. Merci pour ton intérêt et bonne continuation.`
-    );
-    return true;
-  } catch (err) {
-    console.error("Impossible d'envoyer le MP :", err.message);
-    return false;
-  }
+function buildRecruitEmbed(data) {
+  return new EmbedBuilder()
+    .setTitle(`📋 Nouvelle candidature — ${safeText(data.poste, 100)}`)
+    .setColor(0xe52d48)
+    .addFields(
+      { name: "Pseudo Discord", value: safeText(data.discordTag), inline: true },
+      { name: "ID Discord", value: safeText(data.discordId), inline: true },
+      { name: "Prénom", value: safeText(data.prenom), inline: true },
+      { name: "Âge", value: safeText(data.age), inline: true },
+      { name: "Ambitions dans le staff", value: safeText(data.ambitions), inline: false },
+      { name: "Pourquoi vous et pas un autre ?", value: safeText(data.pourquoiVous), inline: false },
+      { name: "Expériences", value: safeText(data.experiences || "Aucune"), inline: false },
+      { name: "Vision du rôle de modérateur", value: safeText(data.roleModerateur), inline: false }
+    )
+    .setTimestamp()
+    .setFooter({ text: "Urgence Lilloise — Recrutement" });
+}
+
+function buildPrisButton(disabled = false) {
+  return new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("pris")
+      .setLabel("Pris")
+      .setStyle(ButtonStyle.Success)
+      .setDisabled(disabled)
+  );
 }
 
 discordClient.once("clientReady", () => {
@@ -104,16 +113,13 @@ app.post("/recrutement", async (req, res) => {
       return res.status(400).json({ error: "Merci de remplir tous les champs obligatoires." });
     }
 
-    if (!config.token) {
-      return res.status(500).json({ error: "Token Discord manquant." });
+    if (!config.token || !config.guildId) {
+      return res.status(500).json({ error: "Configuration Discord incomplète." });
     }
 
     const guild = await discordClient.guilds.fetch(config.guildId);
-    if (!guild) {
-      return res.status(500).json({ error: "Serveur Discord introuvable." });
-    }
-
     const category = await guild.channels.fetch(RECRUIT_CATEGORY_ID);
+
     if (!category || category.type !== ChannelType.GuildCategory) {
       return res.status(500).json({ error: "Catégorie de recrutement introuvable." });
     }
@@ -142,43 +148,22 @@ app.post("/recrutement", async (req, res) => {
       ]
     });
 
-    const embed = new EmbedBuilder()
-      .setTitle(`📋 Nouvelle candidature — ${safeText(poste, 100)}`)
-      .setColor(0xe52d48)
-      .addFields(
-        { name: "Pseudo Discord", value: safeText(discordTag), inline: true },
-        { name: "ID Discord", value: safeText(discordId), inline: true },
-        { name: "Prénom", value: safeText(prenom), inline: true },
-        { name: "Âge", value: safeText(age), inline: true },
-        { name: "Ambitions dans le staff", value: safeText(ambitions), inline: false },
-        { name: "Pourquoi vous et pas un autre ?", value: safeText(pourquoiVous), inline: false },
-        { name: "Expériences", value: safeText(experiences || "Aucune"), inline: false },
-        { name: "Vision du rôle de modérateur", value: safeText(roleModerateur), inline: false }
-      )
-      .setTimestamp()
-      .setFooter({ text: "Urgence Lilloise — Recrutement" });
-
-    const row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(`accept|${discordId}|${poste}|${createdChannel.id}`)
-        .setLabel("Accepter")
-        .setStyle(ButtonStyle.Success),
-      new ButtonBuilder()
-        .setCustomId(`refuse|${discordId}|${poste}|${createdChannel.id}`)
-        .setLabel("Refuser")
-        .setStyle(ButtonStyle.Danger)
-    );
-
-    const roleMentions = (config.mentionRoleIds || [])
-      .map(id => `<@&${id}>`)
-      .join(" ");
+    const embed = buildRecruitEmbed({
+      poste,
+      discordTag,
+      discordId,
+      prenom,
+      age,
+      ambitions,
+      pourquoiVous,
+      experiences,
+      roleModerateur
+    });
 
     await createdChannel.send({
-      content: roleMentions
-        ? `${roleMentions}\n📥 Nouvelle candidature pour **${poste}**`
-        : `📥 Nouvelle candidature pour **${poste}**`,
+      content: `📥 Nouvelle candidature pour **${poste}**`,
       embeds: [embed],
-      components: [row]
+      components: [buildPrisButton(false)]
     });
 
     return res.status(200).json({
@@ -195,11 +180,7 @@ app.post("/recrutement", async (req, res) => {
 discordClient.on("interactionCreate", async (interaction) => {
   try {
     if (!interaction.isButton()) return;
-
-    const [action, applicantId, poste, channelId] = interaction.customId.split("|");
-    if (!["accept", "refuse"].includes(action)) return;
-
-    const isAccept = action === "accept";
+    if (interaction.customId !== "pris") return;
 
     if (
       !interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageChannels) &&
@@ -213,53 +194,21 @@ discordClient.on("interactionCreate", async (interaction) => {
 
     await interaction.deferUpdate();
 
-    const channel = await interaction.guild.channels.fetch(channelId).catch(() => null);
-    if (!channel) return;
+    const oldEmbed = interaction.message.embeds[0];
+    const newEmbed = EmbedBuilder.from(oldEmbed).setColor(0x2ed573);
 
-    const originalEmbed = interaction.message.embeds[0];
-    const updatedEmbed = EmbedBuilder.from(originalEmbed).setColor(
-      isAccept ? 0x2ed573 : 0xe52d48
-    );
-
-    updatedEmbed.addFields({
-      name: "Décision",
-      value: isAccept
-        ? `✅ Acceptée par ${interaction.user.tag}`
-        : `❌ Refusée par ${interaction.user.tag}`,
+    newEmbed.addFields({
+      name: "Statut",
+      value: `✅ Pris par ${interaction.user.tag}`,
       inline: false
     });
 
-    const disabledRow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("disabled_accept")
-        .setLabel("Accepter")
-        .setStyle(ButtonStyle.Success)
-        .setDisabled(true),
-      new ButtonBuilder()
-        .setCustomId("disabled_refuse")
-        .setLabel("Refuser")
-        .setStyle(ButtonStyle.Danger)
-        .setDisabled(true)
-    );
-
     await interaction.message.edit({
-      embeds: [updatedEmbed],
-      components: [disabledRow]
+      embeds: [newEmbed],
+      components: [buildPrisButton(true)]
     });
-
-    await channel.setName(
-      `${isAccept ? "acceptée" : "refusée"}-${interaction.message.id.slice(-4)}`.toLowerCase()
-    ).catch(() => {});
-
-    await sendDecisionDM(applicantId, isAccept, poste);
-
-    if (isAccept) {
-      await channel.send(`✅ <@${applicantId}> candidature **acceptée** par ${interaction.user.tag}.`);
-    } else {
-      await channel.send(`❌ <@${applicantId}> candidature **refusée** par ${interaction.user.tag}.`);
-    }
   } catch (err) {
-    console.error("Erreur interaction button :", err);
+    console.error("Erreur bouton Pris :", err);
   }
 });
 
