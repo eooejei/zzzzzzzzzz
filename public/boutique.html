@@ -9,7 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
 
     :root {
       --text: #ffffff;
@@ -174,15 +179,14 @@
       justify-content: center;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 0 0 10px rgba(255,255,255,0.02), 0 0 70px rgba(47,124,255,0.16), 0 0 100px rgba(229,45,72,0.10);
+      box-shadow:
+        0 0 0 10px rgba(255,255,255,0.02),
+        0 0 70px rgba(47,124,255,0.16),
+        0 0 100px rgba(229,45,72,0.10);
       backdrop-filter: blur(10px);
     }
 
-    .hero-logo img {
-      width: 128px;
-      height: 128px;
-      object-fit: contain;
-    }
+    .hero-logo img { width: 128px; height: 128px; object-fit: contain; }
 
     .eyebrow {
       display: inline-flex;
@@ -230,15 +234,6 @@
 
     .content { padding: 20px 0 70px; }
 
-    .section-box {
-      background: rgba(12, 15, 22, 0.78);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 34px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    }
-
     .shop-toolbar {
       display: flex;
       justify-content: space-between;
@@ -258,6 +253,15 @@
     .shop-toolbar p {
       color: var(--muted);
       font-size: 0.95rem;
+    }
+
+    .section-box {
+      background: rgba(12, 15, 22, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 34px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
 
     .products-grid {
@@ -349,6 +353,46 @@
       letter-spacing: 1px;
       margin-top: 10px;
       opacity: 0.75;
+    }
+
+    .btn-open-offers {
+      width: 100%;
+      margin-top: 14px;
+      background: linear-gradient(135deg, rgba(47,124,255,0.14), rgba(229,45,72,0.14));
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: 0.2s;
+    }
+
+    .btn-open-offers:hover {
+      border-color: rgba(229,45,72,0.45);
+      background: rgba(229,45,72,0.16);
+    }
+
+    .cart-badge {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ffffff;
+      color: #000;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 900;
     }
 
     .modal {
@@ -524,26 +568,6 @@
       letter-spacing: 1px;
     }
 
-    .btn-open-offers {
-      width: 100%;
-      margin-top: 14px;
-      background: linear-gradient(135deg, rgba(47,124,255,0.14), rgba(229,45,72,0.14));
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-weight: 900;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      transition: 0.2s;
-    }
-
-    .btn-open-offers:hover {
-      border-color: rgba(229,45,72,0.45);
-      background: rgba(229,45,72,0.16);
-    }
-
     footer {
       background: #070708;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -613,7 +637,7 @@
       </div>
       <div class="eyebrow">BOUTIQUE OFFICIELLE</div>
       <h1><span class="white">BOUTIQUE</span> <span class="gradient">URGENCE LILLOISE</span></h1>
-      <p>Clique sur un produit pour choisir la durée que tu veux.</p>
+      <p>Clique sur un produit pour ouvrir le choix des durées et l’ajouter au panier.</p>
     </div>
   </section>
 
@@ -622,7 +646,7 @@
       <div class="shop-toolbar">
         <div>
           <h2>Produits disponibles</h2>
-          <p>Choisis un produit puis sélectionne sa durée.</p>
+          <p>Choisis d’abord le produit, puis sa durée.</p>
         </div>
       </div>
 
@@ -636,6 +660,7 @@
             <h3>VIP Custom</h3>
             <p>Un VIP personnalisé pour profiter d'avantages exclusifs sur le serveur.</p>
             <button class="btn-open-offers" onclick="openOfferModal('VIP Custom')">Choisir une durée</button>
+            <div class="product-hint">2 semaines • 1 mois • Lifetime</div>
           </div>
         </div>
 
@@ -648,6 +673,7 @@
             <h3>VIP Voiture</h3>
             <p>Un VIP destiné aux véhicules et à la personnalisation de ton expérience.</p>
             <button class="btn-open-offers" onclick="openOfferModal('VIP Voiture')">Choisir une durée</button>
+            <div class="product-hint">2 semaines • 1 mois • Lifetime</div>
           </div>
         </div>
       </div>
@@ -753,4 +779,40 @@
               <strong>${item.name}</strong>
               <small>${formatEUR(item.price)}</small>
             </div>
-            <button class="remove-btn"
+            <button class="remove-btn" onclick="removeFromCart(${index})">Supprimer</button>
+          </div>
+        `;
+      }).join('');
+
+      cartTotal.textContent = formatEUR(total);
+    }
+
+    function openCart() {
+      document.getElementById('cartModal').style.display = 'flex';
+      updateCart();
+    }
+
+    function closeCart() {
+      document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Ton panier est vide.');
+        return;
+      }
+      window.location.href = 'https://discord.gg/ulsfpd';
+    }
+
+    document.getElementById('offerModal').addEventListener('click', (e) => {
+      if (e.target.id === 'offerModal') closeOfferModal();
+    });
+
+    document.getElementById('cartModal').addEventListener('click', (e) => {
+      if (e.target.id === 'cartModal') closeCart();
+    });
+
+    updateCart();
+  </script>
+</body>
+</html>
