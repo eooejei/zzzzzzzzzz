@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-const client = new Client({
+const discordClient = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
@@ -68,9 +68,7 @@ function buildDecisionButtons(disabled = false, applicantId = null, poste = null
 
 async function sendDecisionDM(userId, accepted, poste) {
   try {
-    console.log("Envoi MP à :", userId, "| accepted =", accepted, "| poste =", poste);
-
-    const user = await client.users.fetch(userId);
+    const user = await discordClient.users.fetch(userId);
 
     if (accepted) {
       await user.send(
@@ -84,13 +82,13 @@ async function sendDecisionDM(userId, accepted, poste) {
 
     return true;
   } catch (err) {
-    console.error("Impossible d'envoyer le MP :", err);
+    console.error("Impossible d'envoyer le MP :", err.message);
     return false;
   }
 }
 
-client.once("ready", () => {
-  console.log(`✅ Bot prêt : ${client.user.tag}`);
+discordClient.once("ready", () => {
+  console.log(`✅ Bot prêt : ${discordClient.user.tag}`);
 });
 
 app.post("/recrutement", async (req, res) => {
@@ -120,7 +118,7 @@ app.post("/recrutement", async (req, res) => {
       return res.status(400).json({ error: "Merci de remplir tous les champs obligatoires." });
     }
 
-    const guild = await client.guilds.fetch(config.guildId);
+    const guild = await discordClient.guilds.fetch(config.guildId);
     if (!guild) {
       return res.status(500).json({ error: "Serveur Discord introuvable." });
     }
@@ -164,11 +162,9 @@ app.post("/recrutement", async (req, res) => {
   }
 });
 
-client.on("interactionCreate", async (interaction) => {
+discordClient.on("interactionCreate", async (interaction) => {
   try {
     if (!interaction.isButton()) return;
-
-    console.log("Bouton cliqué :", interaction.customId);
 
     const [action, applicantId, poste] = interaction.customId.split("|");
     if (!["accept", "refuse"].includes(action)) return;
@@ -203,14 +199,13 @@ client.on("interactionCreate", async (interaction) => {
       components: [buildDecisionButtons(true, applicantId, poste)]
     });
 
-    const dmSent = await sendDecisionDM(applicantId, isAccept, poste);
-    console.log(dmSent ? "MP envoyé avec succès" : "MP non envoyé");
+    await sendDecisionDM(applicantId, isAccept, poste);
   } catch (err) {
     console.error("Erreur interaction button :", err);
   }
 });
 
-client.login(config.token);
+discordClient.login(config.token);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -218,4 +213,7 @@ app.get("*", (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`✅ Serveur lancé sur le port ${PORT}`);
+  if (!discordClient.isReady()) {
+    await discordClient.login(config.token);
+  }
 });
