@@ -559,10 +559,16 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-top: 12px;
+      transition: background 0.2s;
     }
 
     .btn-submit:hover {
       background: #c02138;
+    }
+
+    .btn-submit:disabled {
+      background: #555;
+      cursor: not-allowed;
     }
 
     footer {
@@ -772,7 +778,7 @@
           <textarea name="roleModerateur" rows="3" required placeholder="Votre vision du support..."></textarea>
         </div>
 
-        <button type="submit" class="btn-submit">Envoyer ma candidature</button>
+        <button type="submit" id="submitBtn" class="btn-submit">Envoyer ma candidature</button>
       </form>
     </div>
   </div>
@@ -782,6 +788,8 @@
   </footer>
 
   <script>
+    const DISCORD_WEBHOOK_URL = "VOTRE_WEBHOOK_URL_ICI";
+
     function openModal(roleName) {
       document.getElementById('modalTitle').innerText = "Postuler au poste de " + roleName;
       document.getElementById('roleInput').value = roleName;
@@ -796,14 +804,43 @@
 
     document.getElementById('applyForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Envoi en cours...";
+
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
 
+      const embedPayload = {
+        username: "Recrutement Urgence Lilloise",
+        avatar_url: "https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png",
+        embeds: [
+          {
+            title: "📩 Nouvelle Candidature Recrutement",
+            color: 15019336,
+            fields: [
+              { name: "Poste visé", value: data.poste || "Non spécifié", inline: true },
+              { name: "Prénom & Âge", value: `${data.prenom} (${data.age} ans)`, inline: true },
+              { name: "Discord", value: `${data.discordTag}\n(\`<@${data.discordId}>\` / \`${data.discordId}\`)`, inline: false },
+              { name: "🎯 Ambitions", value: data.ambitions || "Aucune", inline: false },
+              { name: "⭐ Pourquoi lui/elle ?", value: data.pourquoiVous || "Non précisé", inline: false },
+              { name: "📜 Expériences", value: data.experiences || "Aucune expérience mentionnée", inline: false },
+              { name: "🧠 Vision du rôle", value: data.roleModerateur || "Non précisé", inline: false }
+            ],
+            footer: {
+              text: "Urgence Lilloise — Système de recrutement"
+            },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
       try {
-        const response = await fetch('/recrutement', {
+        const response = await fetch(DISCORD_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify(embedPayload)
         });
 
         if (response.ok) {
@@ -811,11 +848,13 @@
           closeModal();
           this.reset();
         } else {
-          const errData = await response.json();
-          alert("❌ " + (errData.error || "Erreur lors de l'envoi de la candidature."));
+          alert("❌ Erreur lors de l'envoi de la candidature.");
         }
       } catch (err) {
-        alert("❌ Impossible de contacter le serveur.");
+        alert("❌ Impossible d'envoyer la candidature. Vérifiez votre connexion.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Envoyer ma candidature";
       }
     });
 
