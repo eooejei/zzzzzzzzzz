@@ -1,3 +1,4 @@
+nom | description [ emoji | categorie | role
 require("dotenv").config();
 
 const express = require("express");
@@ -93,7 +94,7 @@ function buildRecruitEmbed(data) {
       { name: "Vision du rôle de modérateur", value: safeText(data.roleModerateur), inline: false }
     )
     .setTimestamp()
-    .setFooter({ text: "Urgence Lilloise — Recrutement" });
+    .setFooter({ text: "Nice Urgence  — Recrutement" });
 }
 
 function buildDecisionButtons(disabled = false, applicantId = null, poste = null) {
@@ -336,7 +337,7 @@ app.post("/api/create-payment", requireAuth, (req, res) => {
           item_list: {
             items: [
               {
-                name: "Achat Boutique Urgence Lilloise",
+                name: "Achat Boutique Nice Urgence ",
                 sku: `order_${order.lastInsertRowid}`,
                 price: total.toFixed(2),
                 currency: "EUR",
@@ -345,7 +346,7 @@ app.post("/api/create-payment", requireAuth, (req, res) => {
             ]
           },
           amount: { currency: "EUR", total: total.toFixed(2) },
-          description: "Paiement boutique Urgence Lilloise"
+          description: "Paiement boutique Nice Urgence"
         }
       ]
     };
