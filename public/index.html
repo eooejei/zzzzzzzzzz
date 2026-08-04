@@ -9,23 +9,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --bg: #05070d;
-      --text: #f4f7fb;
-      --muted: #a8b2c2;
-      --accent: #e52d48;
-      --blue: #2f7cff;
-      --card: rgba(12, 15, 22, 0.78);
-      --border: rgba(255,255,255,0.08);
-      --shadow: 0 20px 60px rgba(0,0,0,0.45);
-      --radius: 18px;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Montserrat", sans-serif;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    }
+
+    :root {
+      --bg: #05070d;
+      --text: #ffffff;
+      --muted: #a0a8b6;
+      --accent: #e52d48;
+      --blue: #2f7cff;
     }
 
     html {
@@ -33,13 +29,15 @@
     }
 
     body {
-      min-height: 100vh;
-      color: var(--text);
       background:
         radial-gradient(circle at 20% 20%, rgba(47,124,255,0.18), transparent 28%),
-        radial-gradient(circle at 80% 22%, rgba(229,45,72,0.16), transparent 26%),
+        radial-gradient(circle at 80% 25%, rgba(229,45,72,0.16), transparent 26%),
         radial-gradient(circle at 50% 55%, rgba(255,255,255,0.05), transparent 34%),
         linear-gradient(180deg, #05070d 0%, #060913 50%, #070b14 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       overflow-x: hidden;
     }
 
@@ -53,43 +51,40 @@
       margin: 0 auto;
     }
 
+    /* HEADER */
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(5,7,13,0.72);
+      padding: 20px 0;
+      background: rgba(5, 7, 13, 0.72);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .top-bar {
-      height: 4px;
-      background: linear-gradient(90deg, #0055A5 33.33%, #fff 33.33%, #fff 66.66%, #EF4135 66.66%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .header-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 20px;
-      padding: 18px 0;
+      flex-wrap: wrap;
     }
 
     .logo {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-size: 1.02rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      gap: 12px;
     }
 
     .logo img {
-      width: 44px;
-      height: 44px;
+      height: 45px;
+      width: auto;
       border-radius: 50%;
-      object-fit: cover;
       box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
     }
 
@@ -99,41 +94,56 @@
 
     nav {
       display: flex;
+      gap: 18px;
       align-items: center;
-      gap: 10px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
     nav a {
-      color: var(--muted);
-      font-size: 0.95rem;
+      color: #a0a8b6;
+      text-decoration: none;
       font-weight: 600;
-      transition: 0.25s ease;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
       padding: 10px 12px;
       border-radius: 10px;
     }
 
-    nav a:hover,
-    nav a.active {
-      color: var(--text);
+    nav a:hover, nav a.active {
+      color: #ffffff;
       background: rgba(255,255,255,0.05);
     }
 
     .btn-discord {
-      background: #5865F2;
-      color: #fff !important;
-      padding: 12px 18px;
+      background-color: #5865F2;
+      color: #ffffff !important;
+      padding: 11px 18px;
       border-radius: 12px;
+      text-decoration: none;
       font-weight: 800;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, background-color 0.2s;
       box-shadow: 0 12px 30px rgba(88,101,242,0.22);
     }
 
     .btn-discord:hover {
-      background: #4752c4;
-      transform: translateY(-1px);
+      background-color: #4752C4;
+      transform: translateY(-2px);
     }
 
+    .french-flag-bar {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, #0055A5 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #EF4135 66.66%);
+      box-shadow: 0 0 10px rgba(229, 45, 72, 0.3);
+      z-index: 10;
+    }
+
+    /* HERO */
     .hero {
       position: relative;
       min-height: 88vh;
@@ -141,7 +151,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 50px 20px 70px;
+      padding: 60px 20px 70px;
       overflow: hidden;
     }
 
@@ -162,7 +172,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.62) 70%, rgba(0,0,0,0.9) 100%);
+        radial-gradient(circle at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.62) 70%, rgba(0,0,0,0.92) 100%);
     }
 
     .hero-content {
@@ -186,6 +196,7 @@
         0 0 70px rgba(47,124,255,0.16),
         0 0 100px rgba(229,45,72,0.10);
       backdrop-filter: blur(10px);
+      margin-bottom: 26px;
     }
 
     .hero-logo img {
@@ -194,7 +205,7 @@
       object-fit: contain;
     }
 
-    .eyebrow {
+    .sub-title {
       display: inline-flex;
       align-items: center;
       gap: 12px;
@@ -206,15 +217,15 @@
       margin-bottom: 16px;
     }
 
-    .eyebrow::before,
-    .eyebrow::after {
+    .sub-title::before,
+    .sub-title::after {
       content: "";
       width: 38px;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--blue), transparent);
     }
 
-    .hero h1 {
+    h1 {
       font-size: clamp(3rem, 8vw, 7rem);
       line-height: 0.92;
       text-transform: uppercase;
@@ -223,22 +234,22 @@
       margin-bottom: 16px;
     }
 
-    .hero h1 .white {
+    h1 .white {
       color: #f4f7fb;
     }
 
-    .hero h1 .gradient {
+    h1 .gradient {
       background: linear-gradient(90deg, #2f7cff 0%, #5d79e9 35%, #a35ed1 70%, #e52d48 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p {
-      font-size: 1.1rem;
+    p.description {
       color: var(--muted);
+      font-size: 1.1rem;
       max-width: 760px;
-      margin: 0 auto 34px;
       line-height: 1.7;
+      margin: 0 auto 34px;
     }
 
     .hero-stats {
@@ -275,78 +286,141 @@
       text-transform: uppercase;
     }
 
+    .cta-container {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      background-color: #e52d48;
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.2s, transform 0.2s;
+      box-shadow: 0 12px 30px rgba(229,45,72,0.22);
+    }
+
+    .btn-primary:hover {
+      background-color: #c02138;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* SECTION CARROUSEL DES MÉTIERS */
     .jobs-section {
-      padding: 40px 0 70px;
-      background: linear-gradient(180deg, rgba(7,11,20,0.35), rgba(5,7,13,0.94));
-      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 40px 0 60px 0;
+      overflow: hidden;
+      position: relative;
+      background: rgba(10, 10, 12, 0.6);
+      backdrop-filter: blur(5px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .jobs-header-container {
       display: flex;
       justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-bottom: 24px;
+      align-items: baseline;
+      padding-left: 10%;
+      padding-right: 10%;
+      margin-bottom: 25px;
       flex-wrap: wrap;
+      gap: 10px;
     }
 
     .jobs-section h2 {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 900;
       text-transform: uppercase;
+      color: #ffffff;
       letter-spacing: 1px;
     }
 
-    .jobs-section p.sub {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-top: 6px;
+    .jobs-notice {
+      color: #e52d48;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(229, 45, 72, 0.1);
+      border: 1px solid rgba(229, 45, 72, 0.3);
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    .carousel-track {
+      display: flex;
       gap: 20px;
+      width: max-content;
+      animation: scrollJobs 30s linear infinite;
+    }
+
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollJobs {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-50% - 10px));
+      }
     }
 
     .job-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      min-height: 320px;
+      width: 260px;
+      height: 360px;
+      border-radius: 12px;
+      background-color: #0a0a0c;
       position: relative;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
     .job-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(229,45,72,0.4);
+      transform: translateY(-8px);
+      border-color: #e52d48;
     }
 
     .job-card.has-bg {
       background-size: cover;
       background-position: center;
-    }
-
-    .job-thumb {
-      height: 165px;
-      background: linear-gradient(135deg, rgba(47,124,255,0.20), rgba(229,45,72,0.18));
-      position: relative;
-      overflow: hidden;
-    }
-
-    .job-thumb.bg {
-      background-size: cover;
-      background-position: center;
-    }
-
-    .job-thumb::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(5,7,13,0.1), rgba(5,7,13,0.55));
     }
 
     .job-overlay {
@@ -356,50 +430,46 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      background: linear-gradient(to top, rgba(5,7,13,0.95) 20%, rgba(5,7,13,0.45) 70%, transparent 100%);
+      background: linear-gradient(to top, rgba(10, 10, 12, 0.95) 20%, rgba(10, 10, 12, 0.4) 70%, transparent 100%);
     }
 
     .job-badge {
       align-self: flex-start;
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 0.68rem;
+      background: rgba(229, 45, 72, 0.2);
+      color: #ff4d6d;
+      border: 1px solid rgba(229, 45, 72, 0.4);
+      font-size: 0.65rem;
       font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 4px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 10px;
-      border: 1px solid transparent;
-    }
-
-    .job-badge.samu {
-      background: rgba(255,230,77,0.12);
-      color: #ffe86b;
-      border-color: rgba(255,230,77,0.22);
+      margin-bottom: 8px;
     }
 
     .job-badge.police {
-      background: rgba(77,166,255,0.12);
-      color: #66b3ff;
-      border-color: rgba(77,166,255,0.22);
+      background: rgba(45, 125, 229, 0.2);
+      color: #4da6ff;
+      border-color: rgba(45, 125, 229, 0.4);
+    }
+
+    .job-badge.samu {
+      background: rgba(229, 219, 45, 0.2);
+      color: #ffe64d;
+      border-color: rgba(229, 219, 45, 0.4);
     }
 
     .job-badge.prot {
-      background: rgba(255,157,77,0.12);
-      color: #ffb36b;
-      border-color: rgba(255,157,77,0.22);
-    }
-
-    .job-badge.illegal {
-      background: rgba(255,77,109,0.12);
-      color: #ff7a92;
-      border-color: rgba(255,77,109,0.22);
+      background: rgba(229, 116, 45, 0.2);
+      color: #ff9d4d;
+      border-color: rgba(229, 116, 45, 0.4);
     }
 
     .job-card h3 {
-      font-size: 1.18rem;
-      font-weight: 900;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .job-card h3 a {
@@ -409,39 +479,33 @@
     }
 
     .job-card h3 a:hover {
-      color: var(--accent);
+      color: #e52d48;
     }
 
     .job-card p {
-      font-size: 0.88rem;
-      color: #a0a8b6;
-      line-height: 1.5;
+      font-size: 0.8rem;
+      color: #a0a0a0;
+      line-height: 1.3;
     }
 
+    /* FOOTER */
     footer {
-      background: rgba(5,7,13,0.95);
-      border-top: 1px solid rgba(255,255,255,0.06);
+      background: #070708;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       padding: 20px;
       text-align: center;
-      color: #7f8795;
-      font-size: 0.88rem;
+      color: #666666;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
 
     footer span {
-      color: var(--accent);
-      font-weight: 800;
+      color: #e52d48;
+      font-weight: 700;
     }
 
     @media (max-width: 900px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        justify-content: flex-start;
-      }
-
       .hero-stats {
         grid-template-columns: 1fr;
       }
@@ -454,31 +518,40 @@
       .hero-stat:last-child {
         border-bottom: 0;
       }
+
+      .jobs-header-container {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
 
-    @media (max-width: 640px) {
-      .container {
-        width: min(100% - 24px, 1200px);
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .cta-container {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
       }
 
       .hero {
         min-height: 82vh;
       }
-
-      .hero-logo {
-        width: 150px;
-        height: 150px;
-      }
-
-      .hero-logo img {
-        width: 112px;
-        height: 112px;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="top-bar"></div>
 
   <header>
     <div class="container header-inner">
@@ -486,11 +559,10 @@
         <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo Urgence Lilloise">
         Urgence Lilloise <span>Semi FivePD</span>
       </a>
-
       <nav>
         <a href="index.html" class="active">Accueil</a>
         <a href="recrutement.html">Recrutement</a>
-        <a href="boutique.html">Boutique</a>
+        <a href="boutique">Boutique</a>
         <a href="https://discord.gg/WHR9Nbs29" target="_blank" class="btn-discord">
           <i class="fa-brands fa-discord"></i> Discord
         </a>
@@ -498,57 +570,160 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-logo">
-          <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo">
+  <div class="french-flag-bar"></div>
+
+  <main class="hero">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo">
+      </div>
+
+      <div class="sub-title">ROLEPLAY FRANÇAIS</div>
+
+      <h1>
+        <span class="white">URGENCE</span> <span class="gradient">LILLOISE</span>
+      </h1>
+
+      <p class="description">
+        Lille autrement. Ton histoire commence ici. Et pas autre part.
+      </p>
+
+      <div class="cta-container">
+        <a href="fivem://connect/votre-ip" class="btn-primary">
+          <i class="fa-solid fa-play"></i> Rejoindre le serveur
+        </a>
+        <a href="reglement.html" class="btn-secondary">
+          <i class="fa-solid fa-book"></i> Lire le règlement
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <small>Expérience</small>
+          <strong>Immersive</strong>
         </div>
-
-        <div class="eyebrow">Roleplay Français</div>
-
-        <h1>
-          <span class="white">Urgence</span> <span class="gradient">Lilloise</span>
-        </h1>
-
-        <p>
-          Lille autrement. Ton histoire commence ici. Et pas autre part.
-        </p>
-
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <small>Expérience</small>
-            <strong>Immersive</strong>
-          </div>
-          <div class="hero-stat">
-            <small>Communauté</small>
-            <strong>Active</strong>
-          </div>
-          <div class="hero-stat">
-            <small>Univers</small>
-            <strong>Évolutif</strong>
-          </div>
+        <div class="hero-stat">
+          <small>Communauté</small>
+          <strong>Active</strong>
+        </div>
+        <div class="hero-stat">
+          <small>Univers</small>
+          <strong>Évolutif</strong>
         </div>
       </div>
-    </section>
+    </div>
+  </main>
 
-    <section class="jobs-section">
-      <div class="container">
-        <div class="jobs-header-container">
-          <div>
-            <h2>Métiers & factions</h2>
-            <p class="sub">Les postes restent comme avant, avec un rendu plus propre.</p>
-          </div>
+  <section class="jobs-section">
+    <div class="jobs-header-container">
+      <h2>Métiers & Factions</h2>
+      <div class="jobs-notice">
+        <i class="fa-solid fa-triangle-exclamation"></i> Visuels en cours de finalisation
+      </div>
+    </div>
+
+    <div class="carousel-track">
+      <div class="job-card">
+        <div class="job-overlay">
+          <span class="job-badge samu">Urgences Médicales</span>
+          <h3>SAMU</h3>
+          <p>Intervenez sur les urgences vitales et prodiguez les premiers soins sur le terrain.</p>
         </div>
+      </div>
 
-        <div class="jobs-grid">
-          <div class="job-card">
-            <div class="job-overlay">
-              <span class="job-badge samu">Urgences Médicales</span>
-              <h3>SAMU</h3>
-              <p>Intervenez sur les urgences vitales et prodiguez les premiers soins sur le terrain.</p>
-            </div>
-          </div>
+      <div class="job-card has-bg" style="background-image: url('https://media.discordapp.net/attachments/1490687935509430293/1530424728664408174/image.png?ex=6a662f59&is=6a64ddd9&hm=742189568f00fbba3ae5efedf5bfcc3f6f8a38c97dc91e5d88233efeeb6f7683&=&format=webp&quality=lossless');">
+        <div class="job-overlay">
+          <span class="job-badge police">Forces de l'ordre</span>
+          <h3><a href="https://discord.gg/QFqYSXcAA" target="_blank">Police Nationale</a></h3>
+          <p>Assurez la sécurité en milieu urbain et menez des enquêtes judiciaires.</p>
+        </div>
+      </div>
 
-          <div class="job-card has-bg" style="background-image:url('https://media.discordapp.net/attachments/1490687935509430293/1530424728664408174/image.png?ex=6a662f59&is=6a64ddd9&hm=742189568f00fbba3ae5efedf5bfcc3f6f8a38c97dc91e5d88233efeeb6f7683&=&format=webp&quality=lossless');">
-            <div class="job-overlay">
+      <div class="job-card has-bg" style="background-image: url('https://media.discordapp.net/attachments/1525156248444469329/1528442803607044207/Capture_decran_2026-07-19_184349.png?ex=6a6639c9&is=6a64e849&hm=79ed09da875f570a4ec189b0b8a9f665c0ba9dc77b4971dfd942574c6e12d425&=&format=webp&quality=lossless');">
+        <div class="job-overlay">
+          <span class="job-badge police">Proximité</span>
+          <h3><a href="https://discord.gg/2BrKvcMjj" target="_blank">Police Municipale</a></h3>
+          <p>Veillez au respect de l'ordre public et à la tranquillité des Lillois au quotidien.</p>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-overlay">
+          <span class="job-badge police">Forces de l'ordre</span>
+          <h3><a href="https://discord.gg/K7T7sCWhv4" target="_blank">Gendarmerie</a></h3>
+          <p>Patrouillez sur les axes routiers et sécurisez l'ensemble du territoire.</p>
+        </div>
+      </div>
+
+      <div class="job-card has-bg" style="background-image: url('https://media.discordapp.net/attachments/1316456777214332948/1527687288794910881/BH7UwWz52EsA.webp?ex=6a661d28&is=6a64cba8&hm=09cf296b4d5b715f01c8f787f85ed1be35a7778e1e01991d50b14dc261b37f6d&=&format=webp');">
+        <div class="job-overlay">
+          <span class="job-badge">Illégal</span>
+          <h3><a href="https://discord.gg/JThKDtbshr" target="_blank">Illégal</a></h3>
+          <p>Développez vos réseaux clandestins, trafics et affaires hors-la-loi.</p>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-overlay">
+          <span class="job-badge prot">Secourisme</span>
+          <h3>Protection Civile</h3>
+          <p>Soutenez les populations, gérez les dispositifs prévisionnels de secours.</p>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-overlay">
+          <span class="job-badge samu">Urgences Médicales</span>
+          <h3>SAMU</h3>
+          <p>Intervenez sur les urgences vitales et prodiguez les premiers soins sur le terrain.</p>
+        </div>
+      </div>
+
+      <div class="job-card has-bg" style="background-image: url('https://media.discordapp.net/attachments/1490687935509430293/1530424728664408174/image.png?ex=6a662f59&is=6a64ddd9&hm=742189568f00fbba3ae5efedf5bfcc3f6f8a38c97dc91e5d88233efeeb6f7683&=&format=webp&quality=lossless');">
+        <div class="job-overlay">
+          <span class="job-badge police">Forces de l'ordre</span>
+          <h3><a href="https://discord.gg/QFqYSXcAA" target="_blank">Police Nationale</a></h3>
+          <p>Assurez la sécurité en milieu urbain et menez des enquêtes judiciaires.</p>
+        </div>
+      </div>
+
+      <div class="job-card has-bg" style="background-image: url('https://media.discordapp.net/attachments/1525156248444469329/1528442803607044207/Capture_decran_2026-07-19_184349.png?ex=6a6639c9&is=6a64e849&hm=79ed09da875f570a4ec189b0b8a9f665c0ba9dc77b4971dfd942574c6e12d425&=&format=webp&quality=lossless');">
+        <div class="job-overlay">
+          <span class="job-badge police">Proximité</span>
+          <h3><a href="https://discord.gg/2BrKvcMjj" target="_blank">Police Municipale</a></h3>
+          <p>Veillez au respect de l'ordre public et à la tranquillité des Lillois au quotidien.</p>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-overlay">
+          <span class="job-badge police">Forces de l'ordre</span>
+          <h3><a href="https://discord.gg/K7T7sCWhv4" target="_blank">Gendarmerie</a></h3>
+          <p>Patrouillez sur les axes routiers et sécurisez l'ensemble du territoire.</p>
+        </div>
+      </div>
+
+      <div class="job-card has-bg" style="background-image: url('https://media.discordapp.net/attachments/1316456777214332948/1527687288794910881/BH7UwWz52EsA.webp?ex=6a661d28&is=6a64cba8&hm=09cf296b4d5b715f01c8f787f85ed1be35a7778e1e01991d50b14dc261b37f6d&=&format=webp');">
+        <div class="job-overlay">
+          <span class="job-badge">Illégal</span>
+          <h3><a href="https://discord.gg/JThKDtbshr" target="_blank">Illégal</a></h3>
+          <p>Développez vos réseaux clandestins, trafics et affaires hors-la-loi.</p>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-overlay">
+          <span class="job-badge prot">Secourisme</span>
+          <h3>Protection Civile</h3>
+          <p>Soutenez les populations, gérez les dispositifs prévisionnels de secours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Urgence Lilloise. Tous droits réservés. — Made by <span>Zouda</span></p>
+  </footer>
+
+</body>
+</html>
