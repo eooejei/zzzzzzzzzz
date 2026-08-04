@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique — Urgence Lilloise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    }
+
+    :root {
+      --bg: #05070d;
+      --text: #ffffff;
+      --muted: #a0a8b6;
+      --accent: #e52d48;
+      --blue: #2f7cff;
+      --card: rgba(12, 15, 22, 0.78);
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(47,124,255,0.18), transparent 28%),
+        radial-gradient(circle at 80% 25%, rgba(229,45,72,0.16), transparent 26%),
+        radial-gradient(circle at 50% 55%, rgba(255,255,255,0.05), transparent 34%),
+        linear-gradient(180deg, #05070d 0%, #060913 50%, #070b14 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      background: rgba(5, 7, 13, 0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      height: 45px;
+      width: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: #a0a8b6;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      padding: 10px 12px;
+      border-radius: 10px;
+    }
+
+    nav a:hover, nav a.active {
+      color: #ffffff;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .btn-discord {
+      background-color: #5865F2;
+      color: #ffffff !important;
+      padding: 11px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 12px 30px rgba(88,101,242,0.22);
+    }
+
+    .btn-discord:hover {
+      background-color: #4752C4;
+      transform: translateY(-2px);
+    }
+
+    .french-flag-bar {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, #0055A5 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #EF4135 66.66%);
+      box-shadow: 0 0 10px rgba(229, 45, 72, 0.3);
+    }
+
+    .hero {
+      position: relative;
+      padding: 90px 0 50px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?ex=6a655fbb&is=6a640e3b&hm=cf135396d2c321431e2cbf11e4793469e448ca210a13a972067362bd4e409c8e&=&format=webp&quality=lossless')
+        center/cover no-repeat;
+      opacity: 0.14;
+      filter: blur(2px);
+      transform: scale(1.06);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.62) 70%, rgba(0,0,0,0.92) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1000px, 100%);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero-logo {
+      width: 170px;
+      height: 170px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 0 10px rgba(255,255,255,0.02),
+        0 0 70px rgba(47,124,255,0.16),
+        0 0 100px rgba(229,45,72,0.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-logo img {
+      width: 128px;
+      height: 128px;
+      object-fit: contain;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: #c8cfdb;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    h1 .white {
+      color: #f4f7fb;
+    }
+
+    h1 .gradient {
+      background: linear-gradient(90deg, #2f7cff 0%, #5d79e9 35%, #a35ed1 70%, #e52d48 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.7;
+      margin: 0 auto 34px;
+    }
+
+    .content {
+      padding: 20px 0 70px;
+    }
+
+    .section-box {
+      background: rgba(12, 15, 22, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 34px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 18px;
+      border-radius: 18px;
+      background: rgba(229, 45, 72, 0.12);
+      border: 1px solid rgba(229, 45, 72, 0.25);
+      color: #e52d48;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .section-box h2 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .section-box p {
+      color: #a0a8b6;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .coming-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .coming-card {
+      background: rgba(10, 12, 18, 0.9);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: left;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .coming-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(229,45,72,0.35);
+    }
+
+    .coming-card i {
+      color: #e52d48;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .coming-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .coming-card span {
+      color: #8f92a1;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    footer {
+      background: #070708;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      text-align: center;
+      color: #666666;
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: #e52d48;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .hero-logo {
+        width: 150px;
+        height: 150px;
+      }
+
+      .hero-logo img {
+        width: 112px;
+        height: 112px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .section-box {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo Urgence Lilloise">
+        Urgence Lilloise <span>Semi FivePD</span>
+      </a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="recrutement.html">Recrutement</a>
+        <a href="boutique.html" class="active">Boutique</a>
+        <a href="https://discord.gg/ulsfpd" target="_blank" class="btn-discord">
+          <i class="fa-brands fa-discord"></i> Discord
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="french-flag-bar"></div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo">
+      </div>
+
+      <div class="eyebrow">BOUTIQUE OFFICIELLE</div>
+
+      <h1>
+        <span class="white">BOUTIQUE</span> <span class="gradient">URGENCE LILLOISE</span>
+      </h1>
+
+      <p>
+        La boutique officielle arrive bientôt. Tu pourras retrouver ici les offres, avantages et contenus exclusifs du serveur.
+      </p>
+    </div>
+  </section>
+
+  <div class="container content">
+    <div class="section-box">
+      <div class="empty-icon">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </div>
+      <h2>Aucun produit disponible pour le moment</h2>
+      <p>
+        La boutique est en cours de préparation. Revenez bientôt pour découvrir les futurs packs, avantages et contenus liés à Urgence Lilloise.
+      </p>
+
+      <div class="coming-grid">
+        <div class="coming-card">
+          <i class="fa-solid fa-gift"></i>
+          <h3>Packs à venir</h3>
+          <span>Des offres spéciales seront bientôt ajoutées pour soutenir le serveur.</span>
+        </div>
+        <div class="coming-card">
+          <i class="fa-solid fa-star"></i>
+          <h3>Avantages exclusifs</h3>
+          <span>Des bonus et privilèges réservés aux membres de la communauté.</span>
+        </div>
+        <div class="coming-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h3>Contenus serveur</h3>
+          <span>Des éléments en lien avec le roleplay et l'univers d'Urgence Lilloise.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Urgence Lilloise. Tous droits réservés. — Made by <span>Zouda</span></p>
+  </footer>
+</body>
+</html>
