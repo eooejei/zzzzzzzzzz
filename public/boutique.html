@@ -9,27 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
 
     :root {
-      --bg: #05070d;
       --text: #ffffff;
       --muted: #a0a8b6;
       --accent: #e52d48;
       --blue: #2f7cff;
-      --card: rgba(12, 15, 22, 0.78);
-      --border: rgba(255,255,255,0.08);
       --green: #2ed573;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background:
@@ -44,10 +34,7 @@
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .container {
       width: min(1200px, calc(100% - 32px));
@@ -85,14 +72,11 @@
 
     .logo img {
       height: 45px;
-      width: auto;
       border-radius: 50%;
       box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
     }
 
-    .logo span {
-      color: var(--accent);
-    }
+    .logo span { color: var(--accent); }
 
     nav {
       display: flex;
@@ -106,7 +90,7 @@
       color: #a0a8b6;
       font-size: 0.95rem;
       font-weight: 600;
-      transition: all 0.25s ease;
+      transition: 0.25s;
       padding: 10px 12px;
       border-radius: 10px;
     }
@@ -116,8 +100,7 @@
       background: rgba(255,255,255,0.05);
     }
 
-    .btn-discord,
-    .btn-cart {
+    .btn-discord, .btn-cart {
       background-color: #5865F2;
       color: #ffffff !important;
       padding: 11px 18px;
@@ -138,10 +121,7 @@
       box-shadow: 0 12px 30px rgba(229,45,72,0.22);
     }
 
-    .btn-discord:hover,
-    .btn-cart:hover {
-      transform: translateY(-2px);
-    }
+    .btn-discord:hover, .btn-cart:hover { transform: translateY(-2px); }
 
     .french-flag-bar {
       height: 4px;
@@ -173,8 +153,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.62) 70%, rgba(0,0,0,0.92) 100%);
+      background: radial-gradient(circle at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.62) 70%, rgba(0,0,0,0.92) 100%);
     }
 
     .hero-content {
@@ -195,10 +174,7 @@
       justify-content: center;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow:
-        0 0 0 10px rgba(255,255,255,0.02),
-        0 0 70px rgba(47,124,255,0.16),
-        0 0 100px rgba(229,45,72,0.10);
+      box-shadow: 0 0 0 10px rgba(255,255,255,0.02), 0 0 70px rgba(47,124,255,0.16), 0 0 100px rgba(229,45,72,0.10);
       backdrop-filter: blur(10px);
     }
 
@@ -220,8 +196,7 @@
       margin-bottom: 16px;
     }
 
-    .eyebrow::before,
-    .eyebrow::after {
+    .eyebrow::before, .eyebrow::after {
       content: "";
       width: 38px;
       height: 1px;
@@ -237,9 +212,7 @@
       margin-bottom: 16px;
     }
 
-    h1 .white {
-      color: #f4f7fb;
-    }
+    h1 .white { color: #f4f7fb; }
 
     h1 .gradient {
       background: linear-gradient(90deg, #2f7cff 0%, #5d79e9 35%, #a35ed1 70%, #e52d48 100%);
@@ -255,8 +228,15 @@
       margin: 0 auto 34px;
     }
 
-    .content {
-      padding: 20px 0 70px;
+    .content { padding: 20px 0 70px; }
+
+    .section-box {
+      background: rgba(12, 15, 22, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 34px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
 
     .shop-toolbar {
@@ -280,15 +260,6 @@
       font-size: 0.95rem;
     }
 
-    .section-box {
-      background: rgba(12, 15, 22, 0.78);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 34px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    }
-
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -304,7 +275,6 @@
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
-      cursor: pointer;
     }
 
     .product-card:hover {
@@ -381,26 +351,6 @@
       opacity: 0.75;
     }
 
-    .cart-badge {
-      position: relative;
-    }
-
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ffffff;
-      color: #000;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 900;
-    }
-
     .modal {
       position: fixed;
       inset: 0;
@@ -474,6 +424,79 @@
       background: rgba(229,45,72,0.12);
     }
 
+    .cart-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 3000;
+      padding: 20px;
+    }
+
+    .cart-panel {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(12, 15, 22, 0.96);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .cart-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-header h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .cart-close {
+      background: none;
+      border: none;
+      color: #a0a8b6;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .cart-body {
+      padding: 22px 24px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cart-item:last-child {
+      border-bottom: 0;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: 1px solid rgba(229,45,72,0.35);
+      color: #ff7a92;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
     .cart-footer {
       padding: 18px 24px 24px;
       border-top: 1px solid rgba(255,255,255,0.08);
@@ -501,26 +524,24 @@
       letter-spacing: 1px;
     }
 
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .cart-item:last-child {
-      border-bottom: 0;
-    }
-
-    .remove-btn {
-      background: transparent;
-      border: 1px solid rgba(229,45,72,0.35);
-      color: #ff7a92;
-      padding: 8px 10px;
-      border-radius: 10px;
+    .btn-open-offers {
+      width: 100%;
+      margin-top: 14px;
+      background: linear-gradient(135deg, rgba(47,124,255,0.14), rgba(229,45,72,0.14));
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 900;
       cursor: pointer;
-      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: 0.2s;
+    }
+
+    .btn-open-offers:hover {
+      border-color: rgba(229,45,72,0.45);
+      background: rgba(229,45,72,0.16);
     }
 
     footer {
@@ -573,9 +594,8 @@
         <a href="index.html">Accueil</a>
         <a href="recrutement.html">Recrutement</a>
         <a href="boutique.html" class="active">Boutique</a>
-        <button class="btn-cart cart-badge" onclick="openCart()">
+        <button class="btn-cart" onclick="openCart()">
           <i class="fa-solid fa-cart-shopping"></i> Panier
-          <span class="cart-count" id="cartCount">0</span>
         </button>
         <a href="https://discord.gg/ulsfpd" target="_blank" class="btn-discord">
           <i class="fa-brands fa-discord"></i> Discord
@@ -591,16 +611,9 @@
       <div class="hero-logo">
         <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo">
       </div>
-
       <div class="eyebrow">BOUTIQUE OFFICIELLE</div>
-
-      <h1>
-        <span class="white">BOUTIQUE</span> <span class="gradient">URGENCE LILLOISE</span>
-      </h1>
-
-      <p>
-        Clique sur un produit pour choisir la durée que tu veux.
-      </p>
+      <h1><span class="white">BOUTIQUE</span> <span class="gradient">URGENCE LILLOISE</span></h1>
+      <p>Clique sur un produit pour choisir la durée que tu veux.</p>
     </div>
   </section>
 
@@ -614,7 +627,7 @@
       </div>
 
       <div class="products-grid">
-        <div class="product-card" onclick="openOfferModal('VIP Custom')">
+        <div class="product-card">
           <div class="product-image">
             <img src="images/vip-custom.jpg" alt="VIP Custom">
             <div class="product-badge">VIP</div>
@@ -622,11 +635,11 @@
           <div class="product-body">
             <h3>VIP Custom</h3>
             <p>Un VIP personnalisé pour profiter d'avantages exclusifs sur le serveur.</p>
-            <div class="product-hint">Clique pour choisir une durée</div>
+            <button class="btn-open-offers" onclick="openOfferModal('VIP Custom')">Choisir une durée</button>
           </div>
         </div>
 
-        <div class="product-card" onclick="openOfferModal('VIP Voiture')">
+        <div class="product-card">
           <div class="product-image">
             <img src="images/vip-voiture.jpg" alt="VIP Voiture">
             <div class="product-badge">VIP</div>
@@ -634,7 +647,7 @@
           <div class="product-body">
             <h3>VIP Voiture</h3>
             <p>Un VIP destiné aux véhicules et à la personnalisation de ton expérience.</p>
-            <div class="product-hint">Clique pour choisir une durée</div>
+            <button class="btn-open-offers" onclick="openOfferModal('VIP Voiture')">Choisir une durée</button>
           </div>
         </div>
       </div>
@@ -651,13 +664,13 @@
     </div>
   </div>
 
-  <div class="modal" id="cartModal">
-    <div class="modal-panel">
-      <div class="modal-header">
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-panel">
+      <div class="cart-header">
         <h3>Votre panier</h3>
-        <button class="modal-close" onclick="closeCart()">&times;</button>
+        <button class="cart-close" onclick="closeCart()">&times;</button>
       </div>
-      <div class="modal-body" id="cartItems"></div>
+      <div class="cart-body" id="cartItems"></div>
       <div class="cart-footer">
         <div class="total-box">Total : <span id="cartTotal">0,00 €</span></div>
         <button class="checkout-btn" onclick="checkout()">Payer</button>
@@ -671,8 +684,6 @@
 
   <script>
     const cart = [];
-    let currentProduct = "";
-
     const offers = {
       "VIP Custom": [
         { label: "2 semaines", price: 5 },
@@ -691,7 +702,6 @@
     }
 
     function openOfferModal(productName) {
-      currentProduct = productName;
       document.getElementById('offerTitle').textContent = `Choisir une durée — ${productName}`;
       const container = document.getElementById('offerOptions');
       container.innerHTML = "";
@@ -714,11 +724,19 @@
       document.getElementById('offerModal').style.display = 'none';
     }
 
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
     function updateCart() {
-      const cartCount = document.getElementById('cartCount');
       const cartItems = document.getElementById('cartItems');
       const cartTotal = document.getElementById('cartTotal');
-      cartCount.textContent = cart.length;
 
       if (cart.length === 0) {
         cartItems.innerHTML = '<p style="color:#a0a8b6;">Votre panier est vide.</p>';
@@ -735,31 +753,4 @@
               <strong>${item.name}</strong>
               <small>${formatEUR(item.price)}</small>
             </div>
-            <button class="remove-btn" onclick="removeFromCart(${index})">Supprimer</button>
-          </div>
-        `;
-      }).join('');
-
-      cartTotal.textContent = formatEUR(total);
-    }
-
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      updateCart();
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCart();
-    }
-
-    function openCart() {
-      document.getElementById('cartModal').style.display = 'flex';
-      updateCart();
-    }
-
-    function closeCart() {
-      document.getElementById('cartModal').style.display = 'none';
-    }
-
-    function
+            <button class="remove-btn"
