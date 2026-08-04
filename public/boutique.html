@@ -291,7 +291,7 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
@@ -311,27 +311,28 @@
     }
 
     .product-image {
-      height: 160px;
-      background:
-        linear-gradient(135deg, rgba(47,124,255,0.18), rgba(229,45,72,0.18)),
-        rgba(255,255,255,0.02);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: rgba(255,255,255,0.2);
+      height: 180px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .product-body {
       padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       flex: 1;
     }
 
     .product-body h3 {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 800;
     }
 
@@ -339,21 +340,37 @@
       color: #8f92a1;
       font-size: 0.9rem;
       line-height: 1.55;
-      flex: 1;
     }
 
-    .price-row {
+    .offer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .offer-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-top: auto;
+      gap: 10px;
+    }
+
+    .offer-item span {
+      color: #c8cfdb;
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
     .price {
-      font-size: 1.15rem;
+      font-size: 0.95rem;
       font-weight: 900;
       color: #ffffff;
+      white-space: nowrap;
     }
 
     .btn-add {
@@ -367,6 +384,7 @@
       cursor: pointer;
       transition: background 0.2s, color 0.2s, transform 0.2s;
       white-space: nowrap;
+      width: 100%;
     }
 
     .btn-add:hover {
@@ -532,15 +550,6 @@
         padding: 22px;
       }
 
-      .price-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .btn-add {
-        width: 100%;
-      }
-
       .cart-footer {
         flex-direction: column;
         align-items: stretch;
@@ -589,7 +598,7 @@
       </h1>
 
       <p>
-        Découvre les offres de la boutique officielle et ajoute-les facilement à ton panier.
+        Découvre nos offres VIP et ajoute-les facilement à ton panier.
       </p>
     </div>
   </section>
@@ -599,43 +608,65 @@
       <div class="shop-toolbar">
         <div>
           <h2>Produits disponibles</h2>
-          <p>Ajoute les articles voulus à ton panier pour voir le total en direct.</p>
+          <p>3 offres par produit : 2 semaines, 1 mois et Lifetime.</p>
         </div>
       </div>
 
-      <div class="products-grid" id="productsGrid">
+      <div class="products-grid">
         <div class="product-card">
-          <div class="product-image"><i class="fa-solid fa-user-shield"></i></div>
+          <div class="product-image">
+            <img src="https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?format=webp&quality=lossless" alt="VIP Custom">
+          </div>
           <div class="product-body">
-            <h3>Pack Support</h3>
-            <p>Un pack de soutien pour contribuer au développement du serveur.</p>
-            <div class="price-row">
-              <div class="price">3,00 €</div>
-              <button class="btn-add" data-name="Pack Support" data-price="3">Ajouter au panier</button>
+            <h3>VIP Custom</h3>
+            <p>Un VIP personnalisé pour profiter d'avantages exclusifs sur le serveur.</p>
+            <div class="offer-list">
+              <div class="offer-item">
+                <span>2 semaines</span>
+                <div class="price">5,00 €</div>
+              </div>
+              <button class="btn-add" data-name="VIP Custom — 2 semaines" data-price="5">Ajouter — 2 semaines</button>
+
+              <div class="offer-item">
+                <span>1 mois</span>
+                <div class="price">10,00 €</div>
+              </div>
+              <button class="btn-add" data-name="VIP Custom — 1 mois" data-price="10">Ajouter — 1 mois</button>
+
+              <div class="offer-item">
+                <span>Lifetime</span>
+                <div class="price">25,00 €</div>
+              </div>
+              <button class="btn-add" data-name="VIP Custom — Lifetime" data-price="25">Ajouter — Lifetime</button>
             </div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image"><i class="fa-solid fa-star"></i></div>
-          <div class="product-body">
-            <h3>Pack Premium</h3>
-            <p>Un pack plus complet avec des bonus exclusifs et un soutien supplémentaire au projet.</p>
-            <div class="price-row">
-              <div class="price">10,00 €</div>
-              <button class="btn-add" data-name="Pack Premium" data-price="10">Ajouter au panier</button>
-            </div>
+          <div class="product-image">
+            <img src="https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?format=webp&quality=lossless" alt="VIP Voiture">
           </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-image"><i class="fa-solid fa-shield-halved"></i></div>
           <div class="product-body">
-            <h3>Pack Elite</h3>
-            <p>Le pack le plus complet pour soutenir le serveur et obtenir des avantages exclusifs.</p>
-            <div class="price-row">
-              <div class="price">25,00 €</div>
-              <button class="btn-add" data-name="Pack Elite" data-price="25">Ajouter au panier</button>
+            <h3>VIP Voiture</h3>
+            <p>Un VIP destiné aux véhicules et aux avantages liés au style de conduite / personnalisation.</p>
+            <div class="offer-list">
+              <div class="offer-item">
+                <span>2 semaines</span>
+                <div class="price">8,99 €</div>
+              </div>
+              <button class="btn-add" data-name="VIP Voiture — 2 semaines" data-price="8.99">Ajouter — 2 semaines</button>
+
+              <div class="offer-item">
+                <span>1 mois</span>
+                <div class="price">15,99 €</div>
+              </div>
+              <button class="btn-add" data-name="VIP Voiture — 1 mois" data-price="15.99">Ajouter — 1 mois</button>
+
+              <div class="offer-item">
+                <span>Lifetime</span>
+                <div class="price">35,00 €</div>
+              </div>
+              <button class="btn-add" data-name="VIP Voiture — Lifetime" data-price="35">Ajouter — Lifetime</button>
             </div>
           </div>
         </div>
@@ -664,6 +695,10 @@
   <script>
     const cart = [];
 
+    function formatEUR(value) {
+      return value.toFixed(2).replace('.', ',') + ' €';
+    }
+
     function updateCart() {
       const cartCount = document.getElementById('cartCount');
       const cartItems = document.getElementById('cartItems');
@@ -683,14 +718,14 @@
           <div class=\"cart-item\">
             <div>
               <strong>${item.name}</strong>
-              <small>${item.price.toFixed(2).replace('.', ',')} €</small>
+              <small>${formatEUR(item.price)}</small>
             </div>
             <button class=\"remove-btn\" onclick=\"removeFromCart(${index})\">Supprimer</button>
           </div>
         `;
       }).join('');
 
-      cartTotal.textContent = total.toFixed(2).replace('.', ',') + ' €';
+      cartTotal.textContent = formatEUR(total);
     }
 
     function addToCart(name, price) {
