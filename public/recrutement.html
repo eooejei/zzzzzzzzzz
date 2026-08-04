@@ -13,17 +13,14 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
 
     :root {
-      --bg: #05070d;
       --text: #ffffff;
       --muted: #a0a8b6;
       --accent: #e52d48;
       --blue: #2f7cff;
-      --card: rgba(12, 15, 22, 0.78);
-      --border: rgba(255,255,255,0.08);
       --green: #2ed573;
     }
 
@@ -144,7 +141,7 @@
 
     .hero {
       position: relative;
-      padding: 80px 0 40px;
+      padding: 90px 0 50px;
       text-align: center;
       overflow: hidden;
     }
@@ -172,7 +169,7 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      width: min(1100px, 100%);
+      width: min(1000px, 100%);
       margin: 0 auto;
       padding: 0 20px;
     }
@@ -247,6 +244,40 @@
       margin: 0 auto 34px;
     }
 
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 860px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5,7,13,0.38);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-stat {
+      padding: 18px 16px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-stat:last-child {
+      border-right: 0;
+    }
+
+    .hero-stat small {
+      display: block;
+      color: #8c95a8;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .hero-stat strong {
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
     .content {
       padding: 20px 0 70px;
     }
@@ -260,187 +291,232 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
 
-    .header-box {
+    .section-title {
       display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      margin-bottom: 28px;
-    }
-
-    .icon-badge {
-      background: rgba(229, 45, 72, 0.12);
-      border: 1px solid rgba(229, 45, 72, 0.25);
-      color: #e52d48;
-      width: 58px;
-      height: 58px;
-      border-radius: 14px;
-      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
-    .header-info h2 {
-      font-size: 1.8rem;
+    .section-title h2 {
+      font-size: 1.5rem;
       font-weight: 900;
-      margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    .header-info p {
+    .section-title p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .recruit-card {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .recruit-info,
+    .recruit-preview {
+      background: linear-gradient(180deg, rgba(14, 17, 26, 0.98), rgba(10, 12, 18, 0.96));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+
+    .recruit-info {
+      padding: 26px;
+    }
+
+    .recruit-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(229,45,72,0.12);
+      color: #ff7a92;
+      border: 1px solid rgba(229,45,72,0.22);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .recruit-info h3 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .recruit-info p {
       color: #a0a8b6;
       font-size: 0.95rem;
-      line-height: 1.6;
-      max-width: 760px;
-    }
-
-    .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 22px;
-    }
-
-    .job-card {
-      background: rgba(10, 12, 18, 0.95);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .job-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(229,45,72,0.45);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-    }
-
-    .job-card-icon {
-      background: rgba(229, 45, 72, 0.1);
-      color: #e52d48;
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
+      line-height: 1.7;
       margin-bottom: 18px;
     }
 
-    .job-card h3 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-bottom: 10px;
+    .benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0 22px;
     }
 
-    .job-card p {
-      color: #8f92a1;
+    .benefit {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 6px;
       font-size: 0.92rem;
-      line-height: 1.55;
-      margin-bottom: 22px;
+    }
+
+    .benefit span {
+      color: #8f92a1;
+      font-size: 0.88rem;
+      line-height: 1.45;
     }
 
     .btn-apply {
-      background: rgba(46, 213, 115, 0.1);
-      color: #2ed573;
-      border: 1px solid rgba(46, 213, 115, 0.3);
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
       width: 100%;
+      background: linear-gradient(135deg, rgba(46, 213, 115, 0.12), rgba(46, 213, 115, 0.18));
+      color: #2ed573;
+      border: 1px solid rgba(46, 213, 115, 0.28);
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: 0.2s;
     }
 
     .btn-apply:hover {
       background: #2ed573;
-      color: #000000;
+      color: #000;
       transform: translateY(-1px);
     }
 
-    .btn-apply:disabled {
-      cursor: not-allowed;
-      opacity: 0.85;
+    .recruit-preview {
+      position: relative;
+      min-height: 320px;
     }
 
-    .modal-overlay {
+    .recruit-preview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(5,7,13,0.92), rgba(5,7,13,0.22)),
+        url('https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?format=webp&quality=lossless') center/cover no-repeat;
+      opacity: 0.98;
+    }
+
+    .recruit-preview-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .recruit-preview-content h4 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .recruit-preview-content p {
+      color: #c8cfdb;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      max-width: 360px;
+    }
+
+    .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(6px);
       display: none;
-      justify-content: center;
       align-items: center;
-      z-index: 1000;
+      justify-content: center;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 3000;
       padding: 20px;
     }
 
-    .modal-content {
+    .modal-panel {
+      width: 100%;
+      max-width: 680px;
       background: rgba(12, 15, 22, 0.96);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 18px;
-      width: 100%;
-      max-width: 680px;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 30px;
-      position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
     }
 
     .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding-bottom: 15px;
+      gap: 16px;
     }
 
-    .modal-header h2 {
-      font-size: 1.4rem;
+    .modal-header h3 {
+      font-size: 1.15rem;
       font-weight: 900;
-      color: #ffffff;
       text-transform: uppercase;
     }
 
-    .close-btn {
+    .modal-close {
       background: none;
       border: none;
-      color: #a0a0a0;
+      color: #a0a8b6;
       font-size: 1.8rem;
       cursor: pointer;
     }
 
+    .form {
+      padding: 22px 24px 24px;
+    }
+
     .form-section-title {
-      font-size: 0.98rem;
-      font-weight: 800;
+      font-size: 0.92rem;
+      font-weight: 900;
       color: #e52d48;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin: 18px 0 12px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      letter-spacing: 0.8px;
+      margin: 14px 0 10px;
     }
 
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .form-group label {
       display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
       margin-bottom: 6px;
-      color: #cccccc;
+      color: #d0d6e3;
+      font-size: 0.86rem;
+      font-weight: 700;
     }
 
     .form-group input,
@@ -450,8 +526,8 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 10px;
       padding: 12px;
-      color: #ffffff;
-      font-size: 0.9rem;
+      color: #fff;
+      font-size: 0.92rem;
       outline: none;
     }
 
@@ -463,16 +539,16 @@
     .btn-submit {
       width: 100%;
       background: #e52d48;
-      color: #ffffff;
+      color: #fff;
       border: none;
       padding: 14px;
-      border-radius: 10px;
-      font-weight: 800;
+      border-radius: 12px;
+      font-weight: 900;
       font-size: 0.95rem;
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-top: 18px;
+      margin-top: 12px;
     }
 
     .btn-submit:hover {
@@ -494,6 +570,10 @@
     }
 
     @media (max-width: 900px) {
+      .recruit-card {
+        grid-template-columns: 1fr;
+      }
+
       .hero-stats {
         grid-template-columns: 1fr;
       }
@@ -505,6 +585,10 @@
 
       .hero-stat:last-child {
         border-bottom: 0;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -522,12 +606,8 @@
         padding: 22px;
       }
 
-      .header-box {
-        flex-direction: column;
-      }
-
-      .jobs-grid {
-        grid-template-columns: 1fr;
+      .form {
+        padding: 18px;
       }
     }
   </style>
@@ -543,7 +623,7 @@
         <a href="index.html">Accueil</a>
         <a href="recrutement.html" class="active">Recrutement</a>
         <a href="boutique.html">Boutique</a>
-        <a href="https://discord.gg/WHR9Nbs29" target="_blank" class="btn-discord">
+        <a href="https://discord.gg/ulsfpd" target="_blank" class="btn-discord">
           <i class="fa-brands fa-discord"></i> Discord
         </a>
       </nav>
@@ -565,7 +645,7 @@
       </h1>
 
       <p>
-        Nous recherchons des personnes motivées pour maintenir la qualité du Roleplay et faire rayonner Urgence Lilloise.
+        Rejoins l’équipe Support et participe à l’évolution de la communauté Urgence Lilloise.
       </p>
 
       <div class="hero-stats">
@@ -587,73 +667,99 @@
 
   <div class="container content">
     <div class="section-box">
-      <div class="header-box">
-        <div class="icon-badge"><i class="fa-solid fa-headset"></i></div>
-        <div class="header-info">
-          <h2>Rejoindre l'équipe d'Urgence Lilloise</h2>
-          <p>Postule dès maintenant pour rejoindre l’équipe Support et participer à l’évolution du serveur avec une vraie implication sérieuse et active.</p>
+      <div class="section-title">
+        <div>
+          <h2>Rejoindre le staff</h2>
+          <p>Postule pour le poste de Support avec un design plus propre et plus lisible.</p>
         </div>
       </div>
 
-      <div class="jobs-grid">
-        <div class="job-card">
-          <div>
-            <div class="job-card-icon"><i class="fa-solid fa-headset"></i></div>
-            <h3>Support</h3>
-            <p>Répond aux questions des joueurs, aide à résoudre les problèmes et accompagne la communauté au quotidien. Tu seras au contact des membres pour garantir une bonne expérience sur le serveur.</p>
+      <div class="recruit-card">
+        <div class="recruit-info">
+          <div class="recruit-tag"><i class="fa-solid fa-headset"></i> Équipe Support</div>
+          <h3>Une équipe utile, réactive et proche des joueurs</h3>
+          <p>
+            Le rôle du Support est d’aider les joueurs, répondre rapidement aux questions, gérer les problèmes du quotidien et garder une bonne ambiance sur le serveur.
+          </p>
+
+          <div class="benefits">
+            <div class="benefit">
+              <strong>Réactivité</strong>
+              <span>Répondre vite aux demandes et tickets.</span>
+            </div>
+            <div class="benefit">
+              <strong>Accompagnement</strong>
+              <span>Aider les nouveaux et les joueurs en difficulté.</span>
+            </div>
+            <div class="benefit">
+              <strong>Organisation</strong>
+              <span>Garder une communication claire avec le staff.</span>
+            </div>
+            <div class="benefit">
+              <strong>Qualité</strong>
+              <span>Participer à une expérience RP propre.</span>
+            </div>
           </div>
-          <button class="btn-apply" onclick="openModal('Support')">Recrutement ouvert — postuler</button>
+
+          <button class="btn-apply" onclick="openModal('Support')">Postuler maintenant</button>
+        </div>
+
+        <div class="recruit-preview">
+          <div class="recruit-preview-content">
+            <h4>Urgence Lilloise</h4>
+            <p>Un univers sérieux, immersif et en constante évolution. Rejoins l’aventure et participe à son développement.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-content">
+  <div class="modal" id="modalOverlay">
+    <div class="modal-panel">
       <div class="modal-header">
-        <h2 id="modalTitle">Postuler</h2>
-        <button class="close-btn" onclick="closeModal()">&times;</button>
+        <h3 id="modalTitle">Postuler</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
       </div>
 
-      <form id="applyForm">
+      <form id="applyForm" class="form">
         <input type="hidden" id="roleInput" name="poste">
 
-        <div class="form-section-title"><i class="fa-brands fa-discord"></i> Informations : Discord</div>
+        <div class="form-section-title">Informations Discord</div>
         <div class="form-group">
-          <label>Pseudo Discord :</label>
+          <label>Pseudo Discord</label>
           <input type="text" name="discordTag" required placeholder="Ex: ymn_0ffcl">
         </div>
         <div class="form-group">
-          <label>Identifiant Discord (ID Utilisateur) :</label>
+          <label>ID Discord</label>
           <input type="text" name="discordId" required placeholder="Ex: 1525200263173112018">
         </div>
 
-        <div class="form-section-title"><i class="fa-solid fa-user"></i> Informations : IRL</div>
+        <div class="form-section-title">Informations IRL</div>
         <div class="form-group">
-          <label>Prénom :</label>
-          <input type="text" name="prenom" required placeholder="Votre prénom...">
+          <label>Prénom</label>
+          <input type="text" name="prenom" required placeholder="Votre prénom">
         </div>
         <div class="form-group">
-          <label>Âge :</label>
+          <label>Âge</label>
           <input type="number" name="age" required placeholder="Ex: 18">
         </div>
         <div class="form-group">
-          <label>Vos ambitions dans notre staff :</label>
-          <textarea name="ambitions" rows="2" required placeholder="Quelles sont vos ambitions au sein de la communauté ?"></textarea>
+          <label>Vos ambitions dans notre staff</label>
+          <textarea name="ambitions" rows="2" required placeholder="Quelles sont vos ambitions ?"></textarea>
         </div>
 
-        <div class="form-section-title"><i class="fa-solid fa-fire"></i> Informations : Motivation</div>
+        <div class="form-section-title">Motivation</div>
         <div class="form-group">
           <label>Pourquoi vous et pas un autre ?</label>
-          <textarea name="pourquoiVous" rows="3" required placeholder="Exposez vos motivations et vos atouts..."></textarea>
+          <textarea name="pourquoiVous" rows="3" required placeholder="Expliquez vos motivations..."></textarea>
         </div>
         <div class="form-group">
-          <label>Vos expériences (si vous en avez, citez-les) :</label>
-          <textarea name="experiences" rows="3" placeholder="Vos expériences passées en support / staff..."></textarea>
+          <label>Vos expériences</label>
+          <textarea name="experiences" rows="3" placeholder="Vos expériences passées..."></textarea>
         </div>
         <div class="form-group">
-          <label>Dans vos mots, en quoi consiste le rôle d'un support ?</label>
-          <textarea name="roleModerateur" rows="3" required placeholder="Expliquez votre vision du rôle de support..."></textarea>
+          <label>En quoi consiste le rôle de Support ?</label>
+          <textarea name="roleModerateur" rows="3" required placeholder="Votre vision du support..."></textarea>
         </div>
 
         <button type="submit" class="btn-submit">Envoyer ma candidature</button>
