@@ -51,11 +51,11 @@ function buildRecruitEmbed(data) {
     .setFooter({ text: "Urgence Lilloise — Recrutement" });
 }
 
-function buildPrisButton(disabled = false) {
+function buildPrendreButton(disabled = false) {
   return new ActionRowBuilder().addComponents(
     new ButtonBuilder()
-      .setCustomId("pris")
-      .setLabel("Pris")
+      .setCustomId("prendre")
+      .setLabel("Prendre")
       .setStyle(ButtonStyle.Success)
       .setDisabled(disabled)
   );
@@ -114,10 +114,19 @@ app.post("/recrutement", async (req, res) => {
       roleModerateur
     });
 
+    const roleMentions = (config.mentionRoleIds || [])
+      .map(id => `<@&${id}>`)
+      .join(" ");
+
     await channel.send({
-      content: `📥 Nouvelle candidature pour **${poste}**`,
+      content: roleMentions
+        ? `${roleMentions}\n📥 Nouvelle candidature pour **${poste}**`
+        : `📥 Nouvelle candidature pour **${poste}**`,
       embeds: [embed],
-      components: [buildPrisButton(false)]
+      components: [buildPrendreButton(false)],
+      allowedMentions: {
+        roles: config.mentionRoleIds || []
+      }
     });
 
     return res.status(200).json({ success: true });
@@ -130,7 +139,7 @@ app.post("/recrutement", async (req, res) => {
 discordClient.on("interactionCreate", async (interaction) => {
   try {
     if (!interaction.isButton()) return;
-    if (interaction.customId !== "pris") return;
+    if (interaction.customId !== "prendre") return;
 
     if (
       !interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageMessages) &&
@@ -155,10 +164,10 @@ discordClient.on("interactionCreate", async (interaction) => {
 
     await interaction.message.edit({
       embeds: [newEmbed],
-      components: [buildPrisButton(true)]
+      components: [buildPrendreButton(true)]
     });
   } catch (err) {
-    console.error("Erreur bouton Pris :", err);
+    console.error("Erreur bouton Prendre :", err);
   }
 });
 
