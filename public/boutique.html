@@ -129,13 +129,13 @@
       gap: 8px;
       transition: transform 0.2s, background-color 0.2s;
       box-shadow: 0 12px 30px rgba(88,101,242,0.22);
+      border: none;
+      cursor: pointer;
     }
 
     .btn-cart {
       background: rgba(229,45,72,0.95);
       box-shadow: 0 12px 30px rgba(229,45,72,0.22);
-      cursor: pointer;
-      border: none;
     }
 
     .btn-discord:hover,
@@ -567,7 +567,7 @@
           <i class="fa-solid fa-cart-shopping"></i> Panier
           <span class="cart-count" id="cartCount">0</span>
         </button>
-        <a href="https://discord.gg/WHR9Nbs29" target="_blank" class="btn-discord">
+        <a href="https://discord.gg/ulsfpd" target="_blank" class="btn-discord">
           <i class="fa-brands fa-discord"></i> Discord
         </a>
       </nav>
@@ -607,11 +607,11 @@
         <div class="product-card">
           <div class="product-image"><i class="fa-solid fa-user-shield"></i></div>
           <div class="product-body">
-            <h3>Pack Modération</h3>
-            <p>Un pack pour soutenir le serveur et profiter d'avantages liés à la modération.</p>
+            <h3>Pack Support</h3>
+            <p>Un pack de soutien pour contribuer au développement du serveur.</p>
             <div class="price-row">
-              <div class="price">5,00 €</div>
-              <button class="btn-add" data-name="Pack Modération" data-price="5">Ajouter au panier</button>
+              <div class="price">3,00 €</div>
+              <button class="btn-add" data-name="Pack Support" data-price="3">Ajouter au panier</button>
             </div>
           </div>
         </div>
@@ -631,11 +631,11 @@
         <div class="product-card">
           <div class="product-image"><i class="fa-solid fa-shield-halved"></i></div>
           <div class="product-body">
-            <h3>Pack Support</h3>
-            <p>Un petit pack de soutien pour contribuer au développement du serveur.</p>
+            <h3>Pack Elite</h3>
+            <p>Le pack le plus complet pour soutenir le serveur et obtenir des avantages exclusifs.</p>
             <div class="price-row">
-              <div class="price">3,00 €</div>
-              <button class="btn-add" data-name="Pack Support" data-price="3">Ajouter au panier</button>
+              <div class="price">25,00 €</div>
+              <button class="btn-add" data-name="Pack Elite" data-price="25">Ajouter au panier</button>
             </div>
           </div>
         </div>
@@ -652,7 +652,7 @@
       <div class="cart-body" id="cartItems"></div>
       <div class="cart-footer">
         <div class="total-box">Total : <span id="cartTotal">0,00 €</span></div>
-        <button class="checkout-btn" onclick="alert('Fonction de paiement à connecter.')">Valider le panier</button>
+        <button class="checkout-btn" onclick="checkout()">Payer</button>
       </div>
     </div>
   </div>
@@ -668,11 +668,10 @@
       const cartCount = document.getElementById('cartCount');
       const cartItems = document.getElementById('cartItems');
       const cartTotal = document.getElementById('cartTotal');
-
       cartCount.textContent = cart.length;
 
       if (cart.length === 0) {
-        cartItems.innerHTML = '<p style="color:#a0a8b6;">Votre panier est vide.</p>';
+        cartItems.innerHTML = '<p style=\"color:#a0a8b6;\">Votre panier est vide.</p>';
         cartTotal.textContent = '0,00 €';
         return;
       }
@@ -681,12 +680,12 @@
       cartItems.innerHTML = cart.map((item, index) => {
         total += item.price;
         return `
-          <div class="cart-item">
+          <div class=\"cart-item\">
             <div>
               <strong>${item.name}</strong>
               <small>${item.price.toFixed(2).replace('.', ',')} €</small>
             </div>
-            <button class="remove-btn" onclick="removeFromCart(${index})">Supprimer</button>
+            <button class=\"remove-btn\" onclick=\"removeFromCart(${index})\">Supprimer</button>
           </div>
         `;
       }).join('');
@@ -711,6 +710,14 @@
 
     function closeCart() {
       document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Ton panier est vide.');
+        return;
+      }
+      window.location.href = 'https://discord.gg/ulsfpd';
     }
 
     document.querySelectorAll('.btn-add').forEach(button => {
