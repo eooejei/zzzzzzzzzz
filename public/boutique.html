@@ -24,6 +24,7 @@
       --blue: #2f7cff;
       --card: rgba(12, 15, 22, 0.78);
       --border: rgba(255,255,255,0.08);
+      --green: #2ed573;
     }
 
     html {
@@ -103,9 +104,8 @@
 
     nav a {
       color: #a0a8b6;
-      text-decoration: none;
-      font-weight: 600;
       font-size: 0.95rem;
+      font-weight: 600;
       transition: all 0.25s ease;
       padding: 10px 12px;
       border-radius: 10px;
@@ -116,12 +116,12 @@
       background: rgba(255,255,255,0.05);
     }
 
-    .btn-discord {
+    .btn-discord,
+    .btn-cart {
       background-color: #5865F2;
       color: #ffffff !important;
       padding: 11px 18px;
       border-radius: 12px;
-      text-decoration: none;
       font-weight: 800;
       font-size: 0.92rem;
       display: flex;
@@ -131,8 +131,15 @@
       box-shadow: 0 12px 30px rgba(88,101,242,0.22);
     }
 
-    .btn-discord:hover {
-      background-color: #4752C4;
+    .btn-cart {
+      background: rgba(229,45,72,0.95);
+      box-shadow: 0 12px 30px rgba(229,45,72,0.22);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-discord:hover,
+    .btn-cart:hover {
       transform: translateY(-2px);
     }
 
@@ -252,6 +259,27 @@
       padding: 20px 0 70px;
     }
 
+    .shop-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .shop-toolbar h2 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .shop-toolbar p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
     .section-box {
       background: rgba(12, 15, 22, 0.78);
       backdrop-filter: blur(10px);
@@ -259,76 +287,221 @@
       border-radius: 18px;
       padding: 34px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-      text-align: center;
     }
 
-    .empty-icon {
-      width: 76px;
-      height: 76px;
-      margin: 0 auto 18px;
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: rgba(10, 12, 18, 0.95);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 18px;
-      background: rgba(229, 45, 72, 0.12);
-      border: 1px solid rgba(229, 45, 72, 0.25);
-      color: #e52d48;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(229,45,72,0.35);
+    }
+
+    .product-image {
+      height: 160px;
+      background:
+        linear-gradient(135deg, rgba(47,124,255,0.18), rgba(229,45,72,0.18)),
+        rgba(255,255,255,0.02);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2rem;
+      color: rgba(255,255,255,0.2);
     }
 
-    .section-box h2 {
-      font-size: 1.8rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
+    .product-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
     }
 
-    .section-box p {
-      color: #a0a8b6;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .coming-grid {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .coming-card {
-      background: rgba(10, 12, 18, 0.9);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 22px;
-      text-align: left;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .coming-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(229,45,72,0.35);
-    }
-
-    .coming-card i {
-      color: #e52d48;
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-    }
-
-    .coming-card h3 {
-      font-size: 1.05rem;
+    .product-body h3 {
+      font-size: 1.1rem;
       font-weight: 800;
-      margin-bottom: 8px;
     }
 
-    .coming-card span {
+    .product-body p {
       color: #8f92a1;
       font-size: 0.9rem;
       line-height: 1.55;
+      flex: 1;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .price {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .btn-add {
+      background: rgba(46, 213, 115, 0.1);
+      color: #2ed573;
+      border: 1px solid rgba(46, 213, 115, 0.3);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover {
+      background: #2ed573;
+      color: #000;
+      transform: translateY(-1px);
+    }
+
+    .cart-badge {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ffffff;
+      color: #000;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .cart-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .cart-panel {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(12, 15, 22, 0.96);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .cart-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-header h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .cart-close {
+      background: none;
+      border: none;
+      color: #a0a8b6;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .cart-body {
+      padding: 22px 24px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cart-item:last-child {
+      border-bottom: 0;
+    }
+
+    .cart-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .cart-item small {
+      color: #8f92a1;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: 1px solid rgba(229,45,72,0.35);
+      color: #ff7a92;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .cart-footer {
+      padding: 18px 24px 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .total-box {
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .checkout-btn {
+      background: #e52d48;
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     footer {
@@ -345,18 +518,6 @@
       font-weight: 700;
     }
 
-    @media (max-width: 900px) {
-      .hero-logo {
-        width: 150px;
-        height: 150px;
-      }
-
-      .hero-logo img {
-        width: 112px;
-        height: 112px;
-      }
-    }
-
     @media (max-width: 700px) {
       .header-inner {
         flex-direction: column;
@@ -369,6 +530,24 @@
 
       .section-box {
         padding: 22px;
+      }
+
+      .price-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-add {
+        width: 100%;
+      }
+
+      .cart-footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .checkout-btn {
+        width: 100%;
       }
     }
   </style>
@@ -384,7 +563,11 @@
         <a href="index.html">Accueil</a>
         <a href="recrutement.html">Recrutement</a>
         <a href="boutique.html" class="active">Boutique</a>
-        <a href="https://discord.gg/ulsfpd" target="_blank" class="btn-discord">
+        <button class="btn-cart cart-badge" onclick="openCart()">
+          <i class="fa-solid fa-cart-shopping"></i> Panier
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="https://discord.gg/WHR9Nbs29" target="_blank" class="btn-discord">
           <i class="fa-brands fa-discord"></i> Discord
         </a>
       </nav>
@@ -406,37 +589,70 @@
       </h1>
 
       <p>
-        La boutique officielle arrive bientôt. Tu pourras retrouver ici les offres, avantages et contenus exclusifs du serveur.
+        Découvre les offres de la boutique officielle et ajoute-les facilement à ton panier.
       </p>
     </div>
   </section>
 
   <div class="container content">
     <div class="section-box">
-      <div class="empty-icon">
-        <i class="fa-solid fa-bag-shopping"></i>
+      <div class="shop-toolbar">
+        <div>
+          <h2>Produits disponibles</h2>
+          <p>Ajoute les articles voulus à ton panier pour voir le total en direct.</p>
+        </div>
       </div>
-      <h2>Aucun produit disponible pour le moment</h2>
-      <p>
-        La boutique est en cours de préparation. Revenez bientôt pour découvrir les futurs packs, avantages et contenus liés à Urgence Lilloise.
-      </p>
 
-      <div class="coming-grid">
-        <div class="coming-card">
-          <i class="fa-solid fa-gift"></i>
-          <h3>Packs à venir</h3>
-          <span>Des offres spéciales seront bientôt ajoutées pour soutenir le serveur.</span>
+      <div class="products-grid" id="productsGrid">
+        <div class="product-card">
+          <div class="product-image"><i class="fa-solid fa-user-shield"></i></div>
+          <div class="product-body">
+            <h3>Pack Modération</h3>
+            <p>Un pack pour soutenir le serveur et profiter d'avantages liés à la modération.</p>
+            <div class="price-row">
+              <div class="price">5,00 €</div>
+              <button class="btn-add" data-name="Pack Modération" data-price="5">Ajouter au panier</button>
+            </div>
+          </div>
         </div>
-        <div class="coming-card">
-          <i class="fa-solid fa-star"></i>
-          <h3>Avantages exclusifs</h3>
-          <span>Des bonus et privilèges réservés aux membres de la communauté.</span>
+
+        <div class="product-card">
+          <div class="product-image"><i class="fa-solid fa-star"></i></div>
+          <div class="product-body">
+            <h3>Pack Premium</h3>
+            <p>Un pack plus complet avec des bonus exclusifs et un soutien supplémentaire au projet.</p>
+            <div class="price-row">
+              <div class="price">10,00 €</div>
+              <button class="btn-add" data-name="Pack Premium" data-price="10">Ajouter au panier</button>
+            </div>
+          </div>
         </div>
-        <div class="coming-card">
-          <i class="fa-solid fa-shield-halved"></i>
-          <h3>Contenus serveur</h3>
-          <span>Des éléments en lien avec le roleplay et l'univers d'Urgence Lilloise.</span>
+
+        <div class="product-card">
+          <div class="product-image"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="product-body">
+            <h3>Pack Support</h3>
+            <p>Un petit pack de soutien pour contribuer au développement du serveur.</p>
+            <div class="price-row">
+              <div class="price">3,00 €</div>
+              <button class="btn-add" data-name="Pack Support" data-price="3">Ajouter au panier</button>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-panel">
+      <div class="cart-header">
+        <h3>Votre panier</h3>
+        <button class="cart-close" onclick="closeCart()">&times;</button>
+      </div>
+      <div class="cart-body" id="cartItems"></div>
+      <div class="cart-footer">
+        <div class="total-box">Total : <span id="cartTotal">0,00 €</span></div>
+        <button class="checkout-btn" onclick="alert('Fonction de paiement à connecter.')">Valider le panier</button>
       </div>
     </div>
   </div>
@@ -444,5 +660,70 @@
   <footer>
     <p>&copy; 2026 Urgence Lilloise. Tous droits réservés. — Made by <span>Zouda</span></p>
   </footer>
+
+  <script>
+    const cart = [];
+
+    function updateCart() {
+      const cartCount = document.getElementById('cartCount');
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+
+      cartCount.textContent = cart.length;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="color:#a0a8b6;">Votre panier est vide.</p>';
+        cartTotal.textContent = '0,00 €';
+        return;
+      }
+
+      let total = 0;
+      cartItems.innerHTML = cart.map((item, index) => {
+        total += item.price;
+        return `
+          <div class="cart-item">
+            <div>
+              <strong>${item.name}</strong>
+              <small>${item.price.toFixed(2).replace('.', ',')} €</small>
+            </div>
+            <button class="remove-btn" onclick="removeFromCart(${index})">Supprimer</button>
+          </div>
+        `;
+      }).join('');
+
+      cartTotal.textContent = total.toFixed(2).replace('.', ',') + ' €';
+    }
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function openCart() {
+      document.getElementById('cartModal').style.display = 'flex';
+      updateCart();
+    }
+
+    function closeCart() {
+      document.getElementById('cartModal').style.display = 'none';
+    }
+
+    document.querySelectorAll('.btn-add').forEach(button => {
+      button.addEventListener('click', () => {
+        addToCart(button.dataset.name, parseFloat(button.dataset.price));
+      });
+    });
+
+    document.getElementById('cartModal').addEventListener('click', (e) => {
+      if (e.target.id === 'cartModal') closeCart();
+    });
+
+    updateCart();
+  </script>
 </body>
 </html>
