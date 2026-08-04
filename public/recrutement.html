@@ -1,827 +1,812 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recrutement — Nice Urgence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    :root {
-      --text: #ffffff;
-      --muted: #a0a8b6;
-      --accent: #e52d48;
-      --blue: #2f7cff;
-      --green: #2ed573;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at 20% 20%, rgba(47,124,255,0.18), transparent 28%),
-        radial-gradient(circle at 80% 25%, rgba(229,45,72,0.16), transparent 26%),
-        radial-gradient(circle at 50% 55%, rgba(255,255,255,0.05), transparent 34%),
-        linear-gradient(180deg, #05070d 0%, #060913 50%, #070b14 100%);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1200px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      padding: 20px 0;
-      background: rgba(5, 7, 13, 0.72);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: #ffffff;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo img {
-      height: 45px;
-      width: auto;
-      border-radius: 50%;
-      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    nav {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    nav a {
-      color: #a0a8b6;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: 0.25s;
-      padding: 10px 12px;
-      border-radius: 10px;
-    }
-
-    nav a:hover,
-    nav a.active {
-      color: #ffffff;
-      background: rgba(255,255,255,0.05);
-    }
-
-    .btn-discord {
-      background-color: #5865F2;
-      color: #ffffff !important;
-      padding: 11px 18px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.92rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform 0.2s, background-color 0.2s;
-      box-shadow: 0 12px 30px rgba(88,101,242,0.22);
-    }
-
-    .btn-discord:hover {
-      background-color: #4752C4;
-      transform: translateY(-2px);
-    }
-
-    .french-flag-bar {
-      height: 4px;
-      width: 100%;
-      background: linear-gradient(90deg, #0055A5 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #EF4135 66.66%);
-      box-shadow: 0 0 10px rgba(229, 45, 72, 0.3);
-    }
-
-    .hero {
-      position: relative;
-      padding: 90px 0 50px;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        url('https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?ex=6a655fbb&is=6a640e3b&hm=cf135396d2c321431e2cbf11e4793469e448ca210a13a972067362bd4e409c8e&=&format=webp&quality=lossless')
-        center/cover no-repeat;
-      opacity: 0.14;
-      filter: blur(2px);
-      transform: scale(1.06);
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.62) 70%, rgba(0,0,0,0.92) 100%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      width: min(1000px, 100%);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .hero-logo {
-      width: 170px;
-      height: 170px;
-      margin: 0 auto 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow:
-        0 0 0 10px rgba(255,255,255,0.02),
-        0 0 70px rgba(47,124,255,0.16),
-        0 0 100px rgba(229,45,72,0.10);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-logo img {
-      width: 128px;
-      height: 128px;
-      object-fit: contain;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      color: #c8cfdb;
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .eyebrow::before,
-    .eyebrow::after {
-      content: "";
-      width: 38px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 7vw, 6rem);
-      line-height: 0.92;
-      text-transform: uppercase;
-      font-weight: 900;
-      letter-spacing: -2px;
-      margin-bottom: 16px;
-    }
-
-    h1 .white {
-      color: #f4f7fb;
-    }
-
-    h1 .gradient {
-      background: linear-gradient(90deg, #2f7cff 0%, #5d79e9 35%, #a35ed1 70%, #e52d48 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 760px;
-      line-height: 1.7;
-      margin: 0 auto 34px;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      max-width: 860px;
-      margin: 0 auto;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(5,7,13,0.38);
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-stat {
-      padding: 18px 16px;
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-stat:last-child {
-      border-right: 0;
-    }
-
-    .hero-stat small {
-      display: block;
-      color: #8c95a8;
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .hero-stat strong {
-      font-size: 1.05rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .content {
-      padding: 20px 0 70px;
-    }
-
-    .section-box {
-      background: rgba(12, 15, 22, 0.78);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 34px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .section-title h2 {
-      font-size: 1.5rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .recruit-card {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .recruit-info,
-    .recruit-preview {
-      background: linear-gradient(180deg, rgba(14, 17, 26, 0.98), rgba(10, 12, 18, 0.96));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-      overflow: hidden;
-    }
-
-    .recruit-info {
-      padding: 26px;
-    }
-
-    .recruit-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(229,45,72,0.12);
-      color: #ff7a92;
-      border: 1px solid rgba(229,45,72,0.22);
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .recruit-info h3 {
-      font-size: 1.6rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    .recruit-info p {
-      color: #a0a8b6;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .benefits {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 18px 0 22px;
-    }
-
-    .benefit {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .benefit strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.92rem;
-    }
-
-    .benefit span {
-      color: #8f92a1;
-      font-size: 0.88rem;
-      line-height: 1.45;
-    }
-
-    .btn-apply {
-      width: 100%;
-      background: linear-gradient(135deg, rgba(46, 213, 115, 0.12), rgba(46, 213, 115, 0.18));
-      color: #2ed573;
-      border: 1px solid rgba(46, 213, 115, 0.28);
-      padding: 13px 14px;
-      border-radius: 12px;
-      font-size: 0.92rem;
-      font-weight: 900;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      transition: 0.2s;
-    }
-
-    .btn-apply:hover {
-      background: #2ed573;
-      color: #000;
-      transform: translateY(-1px);
-    }
-
-    .recruit-preview {
-      position: relative;
-      min-height: 320px;
-    }
-
-    .recruit-preview::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to top, rgba(5,7,13,0.92), rgba(5,7,13,0.22)),
-        url('images/Logo_UL-2.jpg') center/contain no-repeat;
-      opacity: 0.98;
-    }
-
-    .recruit-preview-content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 24px;
-    }
-
-    .recruit-preview-content h4 {
-      font-size: 1.35rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .recruit-preview-content p {
-      color: #c8cfdb;
-      font-size: 0.93rem;
-      line-height: 1.6;
-      max-width: 360px;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.82);
-      backdrop-filter: blur(6px);
-      z-index: 3000;
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    .modal-panel {
-      width: 100%;
-      max-width: 680px;
-      max-height: 90vh;
-      background: rgba(12, 15, 22, 0.96);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .modal-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .modal-header h3 {
-      font-size: 1.15rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      color: #a0a8b6;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    .form {
-      padding: 22px 24px 24px;
-      overflow-y: auto;
-      max-height: calc(90vh - 70px);
-    }
-
-    .form-section-title {
-      font-size: 0.92rem;
-      font-weight: 900;
-      color: #e52d48;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin: 14px 0 10px;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      color: #d0d6e3;
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      background: #0a0a0c;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 12px;
-      color: #fff;
-      font-size: 0.92rem;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: #e52d48;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: #e52d48;
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 12px;
-      font-weight: 900;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 12px;
-    }
-
-    .btn-submit:hover {
-      background: #c02138;
-    }
-
-    footer {
-      background: #070708;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      text-align: center;
-      color: #666666;
-      font-size: 0.85rem;
-    }
-
-    footer span {
-      color: #e52d48;
-      font-weight: 700;
-    }
-
-    @media (max-width: 900px) {
-      .recruit-card {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-stat {
-        border-right: 0;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-      }
-
-      .hero-stat:last-child {
-        border-bottom: 0;
-      }
-
-      .benefits {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        justify-content: flex-start;
-      }
-
-      .section-box {
-        padding: 22px;
-      }
-
-      .form {
-        padding: 18px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recrutement — Nice Urgence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #05070d;
+      --bg2: #0a0f1a;
+      --card: rgba(10, 15, 26, 0.78);
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --muted: #a0a8b6;
+      --accent: #e52d48;
+      --blue: #2f7cff;
+      --green: #2ed573;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(47,124,255,0.16), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(229,45,72,0.15), transparent 26%),
+        linear-gradient(180deg, #04060b 0%, #060913 55%, #070b14 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5, 7, 13, 0.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .btn-discord {
+      background: #5865F2;
+      color: #fff !important;
+      padding: 11px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 30px rgba(88,101,242,0.22);
+    }
+
+    .btn-discord:hover {
+      background: #4752C4;
+      transform: translateY(-1px);
+    }
+
+    .french-bar {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, #0055A5 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #EF4135 66.66%);
+    }
+
+    .hero {
+      position: relative;
+      padding: 90px 0 50px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('logo.png') center/240px no-repeat;
+      opacity: 0.08;
+      filter: blur(1px);
+      transform: scale(1.1);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.65) 72%, rgba(0,0,0,0.92) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1000px, 100%);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero-logo {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 70px rgba(47,124,255,0.14), 0 0 90px rgba(229,45,72,0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-logo img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #c8cfdb;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      line-height: 0.96;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    h1 .white {
+      color: #f5f7fb;
+    }
+
+    h1 .gradient {
+      background: linear-gradient(90deg, #2f7cff 0%, #5d79e9 35%, #a35ed1 70%, #e52d48 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.03rem;
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.7;
+      margin: 0 auto 34px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 860px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      background: rgba(8, 10, 18, 0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .hero-stat {
+      padding: 18px 16px;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-stat:last-child {
+      border-right: 0;
+    }
+
+    .hero-stat small {
+      display: block;
+      color: #8c95a8;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .hero-stat strong {
+      font-size: 1.02rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .content {
+      padding: 24px 0 72px;
+    }
+
+    .section-box {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-title h2 {
+      font-size: 1.45rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .recruit-card {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .recruit-info,
+    .recruit-preview {
+      background: linear-gradient(180deg, rgba(14, 17, 26, 0.98), rgba(10, 12, 18, 0.96));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .recruit-info {
+      padding: 26px;
+    }
+
+    .recruit-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(229,45,72,0.12);
+      color: #ff7a92;
+      border: 1px solid rgba(229,45,72,0.22);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .recruit-info h3 {
+      font-size: 1.55rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .recruit-info p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+
+    .benefit {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+    }
+
+    .benefit span {
+      color: #8f92a1;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .btn-apply {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(46, 213, 115, 0.12), rgba(46, 213, 115, 0.18));
+      color: #2ed573;
+      border: 1px solid rgba(46, 213, 115, 0.28);
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: 0.2s;
+    }
+
+    .btn-apply:hover {
+      background: #2ed573;
+      color: #000;
+      transform: translateY(-1px);
+    }
+
+    .recruit-preview {
+      position: relative;
+      min-height: 320px;
+      background:
+        linear-gradient(to top, rgba(5,7,13,0.92), rgba(5,7,13,0.28)),
+        url('logo.png') center/220px no-repeat;
+    }
+
+    .recruit-preview-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .recruit-preview-content h4 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .recruit-preview-content p {
+      color: #c8cfdb;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      max-width: 360px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 3000;
+      padding: 20px;
+    }
+
+    .modal-panel {
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      background: rgba(12, 15, 22, 0.96);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #a0a8b6;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .form {
+      padding: 22px 24px 24px;
+      overflow-y: auto;
+      max-height: calc(90vh - 70px);
+    }
+
+    .form-section-title {
+      font-size: 0.92rem;
+      font-weight: 900;
+      color: #e52d48;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 14px 0 10px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #d0d6e3;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: #0a0a0c;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px;
+      color: #fff;
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #e52d48;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: #e52d48;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 12px;
+    }
+
+    .btn-submit:hover {
+      background: #c02138;
+    }
+
+    footer {
+      background: #070708;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      text-align: center;
+      color: #666666;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+
+    footer span {
+      color: #e52d48;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .recruit-card,
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-stat:last-child {
+        border-bottom: 0;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .section-box {
+        padding: 22px;
+      }
+
+      .form {
+        padding: 18px;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container header-inner">
-      <a href="/" class="logo">
-        <img src="logo.png" alt="Logo Nice Urgence">
-        Nice Urgence <span>Semi FivePD</span>
-      </a>
-      <nav>
-        <a href="index.html">Accueil</a>
-        <a href="recrutement.html" class="active">Recrutement</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="https://discord.gg/niceurgence" target="_blank" class="btn-discord">
-          <i class="fa-brands fa-discord"></i> Discord
-        </a>
-      </nav>
-    </div>
-  </header>
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="logo.png" alt="Logo Nice Urgence">
+        Nice <span>Urgence</span>
+      </a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="recrutement.html" class="active">Recrutement</a>
+        <a href="boutique.html">Boutique</a>
+        <a href="https://discord.gg/niceurgence" target="_blank" class="btn-discord">
+          <i class="fa-brands fa-discord"></i> Discord
+        </a>
+      </nav>
+    </div>
+  </header>
 
-  <div class="french-flag-bar"></div>
+  <div class="french-bar"></div>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-logo">
-        <img src="logo.png" alt="Logo">
-      </div>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <img src="logo.png" alt="Logo">
+      </div>
 
-      <div class="eyebrow">RECRUTEMENT OFFICIEL</div>
+      <div class="eyebrow">RECRUTEMENT OFFICIEL</div>
 
-      <h1>
-        <span class="white">REJOINS</span> <span class="gradient">L'ÉQUIPE</span>
-      </h1>
+      <h1>
+        <span class="white">REJOINS</span> <span class="gradient">L'ÉQUIPE</span>
+      </h1>
 
-      <p>
-        Rejoins l’équipe Support et participe à l’évolution de la communauté Nice Urgence.
-      </p>
+      <p>
+        Rejoins l’équipe Support et participe à l’évolution de la communauté Nice Urgence.
+      </p>
 
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <small>Poste</small>
-          <strong>Support</strong>
-        </div>
-        <div class="hero-stat">
-          <small>État</small>
-          <strong>Ouvert</strong>
-        </div>
-        <div class="hero-stat">
-          <small>Objectif</small>
-          <strong>Qualité RP</strong>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <small>Poste</small>
+          <strong>Support</strong>
+        </div>
+        <div class="hero-stat">
+          <small>État</small>
+          <strong>Ouvert</strong>
+        </div>
+        <div class="hero-stat">
+          <small>Objectif</small>
+          <strong>Qualité RP</strong>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="container content">
-    <div class="section-box">
-      <div class="section-title">
-        <div>
-          <h2>Rejoindre le staff</h2>
-          <p>Le formulaire à remplir est conservé comme avant.</p>
-        </div>
-      </div>
+  <div class="container content">
+    <div class="section-box">
+      <div class="section-title">
+        <div>
+          <h2>Rejoindre le staff</h2>
+          <p>Le formulaire à remplir est conservé comme avant.</p>
+        </div>
+      </div>
 
-      <div class="recruit-card">
-        <div class="recruit-info">
-          <div class="recruit-tag"><i class="fa-solid fa-headset"></i> Équipe Support</div>
-          <h3>Une équipe utile, réactive et proche des joueurs</h3>
-          <p>
-            Le rôle du Support est d’aider les joueurs, répondre rapidement aux questions, gérer les problèmes du quotidien et garder une bonne ambiance sur le serveur.
-          </p>
+      <div class="recruit-card">
+        <div class="recruit-info">
+          <div class="recruit-tag"><i class="fa-solid fa-headset"></i> Équipe Support</div>
+          <h3>Une équipe utile, réactive et proche des joueurs</h3>
+          <p>
+            Le rôle du Support est d’aider les joueurs, répondre rapidement aux questions, gérer les problèmes du quotidien et garder une bonne ambiance sur le serveur.
+          </p>
 
-          <div class="benefits">
-            <div class="benefit">
-              <strong>Réactivité</strong>
-              <span>Répondre vite aux demandes et tickets.</span>
-            </div>
-            <div class="benefit">
-              <strong>Accompagnement</strong>
-              <span>Aider les nouveaux et les joueurs en difficulté.</span>
-            </div>
-            <div class="benefit">
-              <strong>Organisation</strong>
-              <span>Garder une communication claire avec le staff.</span>
-            </div>
-            <div class="benefit">
-              <strong>Qualité</strong>
-              <span>Participer à une expérience RP propre.</span>
-            </div>
-          </div>
+          <div class="benefits">
+            <div class="benefit">
+              <strong>Réactivité</strong>
+              <span>Répondre vite aux demandes et tickets.</span>
+            </div>
+            <div class="benefit">
+              <strong>Accompagnement</strong>
+              <span>Aider les nouveaux et les joueurs en difficulté.</span>
+            </div>
+            <div class="benefit">
+              <strong>Organisation</strong>
+              <span>Garder une communication claire avec le staff.</span>
+            </div>
+            <div class="benefit">
+              <strong>Qualité</strong>
+              <span>Participer à une expérience RP propre.</span>
+            </div>
+          </div>
 
-          <button class="btn-apply" onclick="openModal('Support')">Postuler maintenant</button>
-        </div>
+          <button class="btn-apply" onclick="openModal('Support')">Postuler maintenant</button>
+        </div>
 
-        <div class="recruit-preview">
-          <div class="recruit-preview-content">
-            <h4>Nice Urgence</h4>
-            <p>Un univers sérieux, immersif et en constante évolution. Rejoins l’aventure et participe à son développement.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="recruit-preview">
+          <div class="recruit-preview-content">
+            <h4>Nice Urgence</h4>
+            <p>Un univers sérieux, immersif et en constante évolution. Rejoins l’aventure et participe à son développement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="modal" id="modalOverlay">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <h3 id="modalTitle">Postuler</h3>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
+  <div class="modal" id="modalOverlay">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h3 id="modalTitle">Postuler</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
 
-      <form id="applyForm" class="form">
-        <input type="hidden" id="roleInput" name="poste">
+      <form id="applyForm" class="form">
+        <input type="hidden" id="roleInput" name="poste">
 
-        <div class="form-section-title">Informations Discord</div>
-        <div class="form-group">
-          <label>Pseudo Discord</label>
-          <input type="text" name="discordTag" required placeholder="Ex: ymn_0ffcl">
-        </div>
-        <div class="form-group">
-          <label>ID Discord</label>
-          <input type="text" name="discordId" required placeholder="Ex: 1525200263173112018">
-        </div>
+        <div class="form-section-title">Informations Discord</div>
+        <div class="form-group">
+          <label>Pseudo Discord</label>
+          <input type="text" name="discordTag" required placeholder="Ex: ymn_0ffcl">
+        </div>
+        <div class="form-group">
+          <label>ID Discord</label>
+          <input type="text" name="discordId" required placeholder="Ex: 1525200263173112018">
+        </div>
 
-        <div class="form-section-title">Informations IRL</div>
-        <div class="form-group">
-          <label>Prénom</label>
-          <input type="text" name="prenom" required placeholder="Votre prénom">
-        </div>
-        <div class="form-group">
-          <label>Âge</label>
-          <input type="number" name="age" required placeholder="Ex: 18">
-        </div>
-        <div class="form-group">
-          <label>Vos ambitions dans notre staff</label>
-          <textarea name="ambitions" rows="2" required placeholder="Quelles sont vos ambitions ?"></textarea>
-        </div>
+        <div class="form-section-title">Informations IRL</div>
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" name="prenom" required placeholder="Votre prénom">
+        </div>
+        <div class="form-group">
+          <label>Âge</label>
+          <input type="number" name="age" required placeholder="Ex: 18">
+        </div>
+        <div class="form-group">
+          <label>Vos ambitions dans notre staff</label>
+          <textarea name="ambitions" rows="2" required placeholder="Quelles sont vos ambitions ?"></textarea>
+        </div>
 
-        <div class="form-section-title">Motivation</div>
-        <div class="form-group">
-          <label>Pourquoi vous et pas un autre ?</label>
-          <textarea name="pourquoiVous" rows="3" required placeholder="Expliquez vos motivations..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Vos expériences</label>
-          <textarea name="experiences" rows="3" placeholder="Vos expériences passées..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>En quoi consiste le rôle de Support ?</label>
-          <textarea name="roleModerateur" rows="3" required placeholder="Votre vision du support..."></textarea>
-        </div>
+        <div class="form-section-title">Motivation</div>
+        <div class="form-group">
+          <label>Pourquoi vous et pas un autre ?</label>
+          <textarea name="pourquoiVous" rows="3" required placeholder="Expliquez vos motivations..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Vos expériences</label>
+          <textarea name="experiences" rows="3" placeholder="Vos expériences passées..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>En quoi consiste le rôle de Support ?</label>
+          <textarea name="roleModerateur" rows="3" required placeholder="Votre vision du support..."></textarea>
+        </div>
 
-        <button type="submit" class="btn-submit">Envoyer ma candidature</button>
-      </form>
-    </div>
-  </div>
+        <button type="submit" class="btn-submit">Envoyer ma candidature</button>
+      </form>
+    </div>
+  </div>
 
-  <footer>
-    <p>&copy; 2026 Nice Urgence. Tous droits réservés. — Made by <span>Zouda</span></p>
-  </footer>
+  <footer>
+    <p>&copy; 2026 Nice Urgence. Tous droits réservés. — Made by <span>Zouda</span></p>
+  </footer>
 
-  <script>
-    function openModal(roleName) {
-      document.getElementById('modalTitle').innerText = "Postuler au poste de " + roleName;
-      document.getElementById('roleInput').value = roleName;
-      document.getElementById('modalOverlay').style.display = 'flex';
-      document.body.classList.add('modal-open');
-    }
+  <script>
+    function openModal(roleName) {
+      document.getElementById('modalTitle').innerText = "Postuler au poste de " + roleName;
+      document.getElementById('roleInput').value = roleName;
+      document.getElementById('modalOverlay').style.display = 'flex';
+    }
 
-    function closeModal() {
-      document.getElementById('modalOverlay').style.display = 'none';
-      document.body.classList.remove('modal-open');
-    }
+    function closeModal() {
+      document.getElementById('modalOverlay').style.display = 'none';
+    }
 
-    document.getElementById('applyForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData.entries());
+    document.getElementById('applyForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
 
-      try {
-        const response = await fetch('/recrutement', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
+      try {
+        const response = await fetch('/recrutement', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
 
-        if (response.ok) {
-          alert("✅ Candidature envoyée avec succès au staff !");
-          closeModal();
-          this.reset();
-        } else {
-          const errData = await response.json();
-          alert("❌ " + (errData.error || "Erreur lors de l'envoi de la candidature."));
-        }
-      } catch (err) {
-        alert("❌ Impossible de contacter le serveur.");
-      }
-    });
+        if (response.ok) {
+          alert("✅ Candidature envoyée avec succès au staff !");
+          closeModal();
+          this.reset();
+        } else {
+          const errData = await response.json();
+          alert("❌ " + (errData.error || "Erreur lors de l'envoi de la candidature."));
+        }
+      } catch (err) {
+        alert("❌ Impossible de contacter le serveur.");
+      }
+    });
 
-    document.getElementById('modalOverlay').addEventListener('click', (e) => {
-      if (e.target.id === 'modalOverlay') closeModal();
-    });
-  </script>
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target.id === 'modalOverlay') closeModal();
+    });
+  </script>
 </body>
 </html>
