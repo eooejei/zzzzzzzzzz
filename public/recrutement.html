@@ -34,6 +34,10 @@
       overflow-x: hidden;
     }
 
+    body.modal-open {
+      overflow: hidden;
+    }
+
     a { color: inherit; text-decoration: none; }
 
     .container {
@@ -256,9 +260,7 @@
       text-transform: uppercase;
     }
 
-    .content {
-      padding: 20px 0 70px;
-    }
+    .content { padding: 20px 0 70px; }
 
     .section-box {
       background: rgba(12, 15, 22, 0.78);
@@ -437,16 +439,20 @@
       backdrop-filter: blur(6px);
       z-index: 3000;
       padding: 20px;
+      overflow: hidden;
     }
 
     .modal-panel {
       width: 100%;
       max-width: 680px;
+      max-height: 90vh;
       background: rgba(12, 15, 22, 0.96);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 18px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .modal-header {
@@ -474,6 +480,8 @@
 
     .form {
       padding: 22px 24px 24px;
+      overflow-y: auto;
+      max-height: calc(90vh - 70px);
     }
 
     .form-section-title {
@@ -754,10 +762,12 @@
       document.getElementById('modalTitle').innerText = "Postuler au poste de " + roleName;
       document.getElementById('roleInput').value = roleName;
       document.getElementById('modalOverlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
     }
 
     function closeModal() {
       document.getElementById('modalOverlay').style.display = 'none';
+      document.body.classList.remove('modal-open');
     }
 
     document.getElementById('applyForm').addEventListener('submit', async function(e) {
@@ -783,6 +793,10 @@
       } catch (err) {
         alert("❌ Impossible de contacter le serveur.");
       }
+    });
+
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target.id === 'modalOverlay') closeModal();
     });
   </script>
 </body>
