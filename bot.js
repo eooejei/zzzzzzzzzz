@@ -41,8 +41,8 @@ async function sendDecisionDM(userId, accepted, poste) {
   }
 }
 
-client.once("ready", () => {
-  console.log(`✅ Bot connecté en tant que ${client.user.tag}`);
+client.once("clientReady", () => {
+  console.log(`✅ Bot prêt : ${client.user.tag}`);
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -50,16 +50,13 @@ client.on("interactionCreate", async (interaction) => {
     if (!interaction.isButton()) return;
 
     const [action, applicantId, poste] = interaction.customId.split("|");
-
     if (!["accept", "refuse"].includes(action)) return;
 
     const isAccept = action === "accept";
 
     if (
-      !interaction.member.permissions.has(
-        PermissionsBitField.Flags.ManageMessages
-      ) &&
-      !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)
+      !interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageMessages) &&
+      !interaction.memberPermissions?.has(PermissionsBitField.Flags.Administrator)
     ) {
       return interaction.reply({
         content: "❌ Tu n'as pas la permission d'utiliser ce bouton.",
@@ -67,8 +64,10 @@ client.on("interactionCreate", async (interaction) => {
       });
     }
 
-    const embed = interaction.message.embeds[0];
-    const updatedEmbed = EmbedBuilder.from(embed).setColor(
+    await interaction.deferUpdate();
+
+    const originalEmbed = interaction.message.embeds[0];
+    const updatedEmbed = EmbedBuilder.from(originalEmbed).setColor(
       isAccept ? 0x2ed573 : 0xe52d48
     );
 
@@ -82,18 +81,18 @@ client.on("interactionCreate", async (interaction) => {
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId(`disabled_accept|${applicantId}|${poste}`)
-        .setLabel("Accepté")
+        .setCustomId("disabled_accept")
+        .setLabel("Accepter")
         .setStyle(ButtonStyle.Success)
         .setDisabled(true),
       new ButtonBuilder()
-        .setCustomId(`disabled_refuse|${applicantId}|${poste}`)
-        .setLabel("Refusé")
+        .setCustomId("disabled_refuse")
+        .setLabel("Refuser")
         .setStyle(ButtonStyle.Danger)
         .setDisabled(true)
     );
 
-    await interaction.update({
+    await interaction.message.edit({
       embeds: [updatedEmbed],
       components: [row]
     });
@@ -101,12 +100,6 @@ client.on("interactionCreate", async (interaction) => {
     await sendDecisionDM(applicantId, isAccept, poste);
   } catch (err) {
     console.error("Erreur interaction button :", err);
-    if (!interaction.replied && !interaction.deferred) {
-      await interaction.reply({
-        content: "❌ Une erreur est survenue.",
-        ephemeral: true
-      });
-    }
   }
 });
 
