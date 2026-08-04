@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement - Urgence Lilloise</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #0a0a0c;
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 20px 10% 40px 10%;
+    }
+
+    /* HEADER & LOGO */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #1a1a22;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .logo img {
+      height: 45px;
+      width: auto;
+    }
+
+    .logo span {
+      color: #e52d48;
+    }
+
+    .btn-back {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      background-color: #121218;
+      padding: 10px 18px;
+      border-radius: 6px;
+      border: 1px solid #222;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-back:hover {
+      background-color: #1a1a22;
+      border-color: #e52d48;
+    }
+
+    /* CONTENU */
+    .sub-title {
+      color: #e52d48;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .sub-title::before {
+      content: '— ';
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .description {
+      color: #a0a0a0;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    /* ENCADRÉ D'ACCEPTATION AUTOMATIQUE */
+    .acceptance-notice {
+      background: rgba(229, 45, 72, 0.1);
+      border-left: 4px solid #e52d48;
+      padding: 15px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 30px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .acceptance-notice i {
+      color: #e52d48;
+      font-size: 1.2rem;
+    }
+
+    .accordion-container {
+      border: 1px solid #222;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #0e0e12;
+    }
+
+    details {
+      border-bottom: 1px solid #1a1a22;
+      padding: 18px 20px;
+      transition: background 0.2s;
+    }
+
+    details:last-child {
+      border-bottom: none;
+    }
+
+    details[open] {
+      background-color: #121218;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .acc-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .acc-num {
+      color: #e52d48;
+      font-size: 0.9rem;
+      font-weight: 800;
+      min-width: 25px;
+    }
+
+    .acc-content {
+      margin-top: 15px;
+      color: #ccc;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      padding-left: 40px;
+    }
+
+    .acc-content p {
+      margin-bottom: 10px;
+    }
+
+    .acc-content ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .acc-content ul li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .acc-content ul li::before {
+      content: '•';
+      color: #e52d48;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .subtitle-block {
+      color: #ffffff;
+      font-weight: 700;
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+
+    .plus-icon {
+      color: #888;
+      font-size: 1.2rem;
+    }
+
+    .sanction-box {
+      background: rgba(229, 45, 72, 0.1);
+      border-left: 3px solid #e52d48;
+      padding: 10px 15px;
+      margin-top: 12px;
+      font-weight: 700;
+      color: #ff6b81;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER AVEC LOGO ET BOUTON RETOUR -->
+  <header>
+  <a href="/" class="logo">
+  <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo Urgence Lilloise">
+  Urgence Lilloise <span>Semi FivePD</span>
+    </a>
+    <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Accueil</a>
+  </header>
+
+  <div class="sub-title">À lire attentivement</div>
+  <h1>Règlement Officiel</h1>
+  <p class="description">Le respect de ces règles est obligatoire pour garantir une expérience Roleplay de qualité sur Urgence Lilloise.</p>
+
+  <!-- ENCADRÉ D'AVERTISSEMENT -->
+  <div class="acceptance-notice">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>En rejoignant le serveur Urgence Lilloise, vous acceptez automatiquement l'intégralité de ce règlement.</span>
+  </div>
+
+  <div class="accordion-container">
+
+    <!-- 1. Règlement Général -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">01</span>
+          <span>Règlement Général</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <div class="subtitle-block">1.1 Respect</div>
+        <ul>
+          <li>Le respect est obligatoire envers tous les joueurs et les membres du staff.</li>
+          <li>Les insultes HRP, provocations, harcèlement, racisme, sexisme, homophobie ou toute autre discrimination sont interdits.</li>
+          <li>Toute menace IRL est passible d'un bannissement définitif.</li>
+        </ul>
+        <div class="subtitle-block">1.2 Comportement</div>
+        <ul>
+          <li>Ayez un comportement mature.</li>
+          <li>Le troll est interdit.</li>
+          <li>Le soundboard abusif est interdit.</li>
+          <li>Le spam est interdit.</li>
+          <li>Les pseudos inappropriés sont interdits.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 2. Règlement Discord -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">02</span>
+          <span>Règlement Discord</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <ul>
+          <li>Utilisez les salons appropriés.</li>
+          <li>Aucun spam ou flood.</li>
+          <li>Publicité interdite sans autorisation.</li>
+          <li>Les tickets sont le seul moyen de contester une sanction.</li>
+          <li>Les MP aux membres du staff sont interdits sauf autorisation.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 3. Règlement Roleplay -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">03</span>
+          <span>Règlement Roleplay</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p><strong>Le RP est obligatoire.</strong> Vous devez toujours rester dans votre personnage.</p>
+        <div class="subtitle-block">Interdictions RP :</div>
+        <ul>
+          <li>NoFear RP</li>
+          <li>NoPain RP</li>
+          <li>MetaGaming</li>
+          <li>PowerGaming</li>
+          <li>ForceRP</li>
+          <li>FreeKill</li>
+          <li>FreePunch</li>
+          <li>BunnyHop</li>
+          <li>ChickenRun</li>
+          <li>HRP Vocal</li>
+          <li>Combat Logging</li>
+          <li>ALT+F4 pour éviter une scène</li>
+          <li>Utilisation d'informations Discord en RP</li>
+          <li>Utilisation d'un logiciel de triche</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 4. Définitions RP -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">04</span>
+          <span>Définitions RP</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p><strong>FearRP :</strong> Votre personnage tient à sa vie.</p>
+        <p><strong>PainRP :</strong> Votre personnage ressent la douleur.</p>
+        <p><strong>MetaGaming :</strong> Utiliser une information obtenue hors RP.</p>
+        <p><strong>PowerGaming :</strong> Forcer une action sur un autre joueur.</p>
+        <p><strong>MassRP :</strong> La ville est vivante même si les PNJ ne sont pas présents.</p>
+        <p><strong>WinRP :</strong> Chercher uniquement à gagner une scène.</p>
+        <p><strong>Revenge Kill :</strong> Se venger après une mort RP.</p>
+        <p><strong>Car Kill :</strong> Utiliser volontairement un véhicule comme arme.</p>
+      </div>
+    </details>
+
+    <!-- 5. Mort RP -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">05</span>
+          <span>Mort RP</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Après une mort RP :</p>
+        <ul>
+          <li>Vous oubliez les événements ayant conduit à votre mort.</li>
+          <li>Vous ne pouvez pas revenir immédiatement sur la scène.</li>
+          <li>Les représailles immédiates sont interdites.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 6. Déconnexion -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">06</span>
+          <span>Déconnexion</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Interdiction de :</p>
+        <ul>
+          <li>Quitter pendant une scène.</li>
+          <li>Crash volontaire.</li>
+          <li>ALT+F4.</li>
+          <li>Déconnexion pour éviter une sanction.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 7. Scènes RP -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">07</span>
+          <span>Scènes RP</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Chaque scène doit rester :</p>
+        <ul>
+          <li>Réaliste</li>
+          <li>Cohérente</li>
+          <li>Fair-play</li>
+        </ul>
+        <p style="margin-top: 10px;"><em>Le but est de créer du RP, pas de gagner.</em></p>
+      </div>
+    </details>
+
+    <!-- 8. Police / Gendarmerie / SAMU -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">08</span>
+          <span>Police / Gendarmerie / SAMU</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Les services publics doivent :</p>
+        <ul>
+          <li>Respecter le Code pénal.</li>
+          <li>Jouer sérieusement.</li>
+          <li>Éviter les abus de pouvoir.</li>
+          <li>Respecter leur hiérarchie.</li>
+        </ul>
+        <p style="margin-top: 10px;"><em>Les abus seront sanctionnés.</em></p>
+      </div>
+    </details>
+
+    <!-- 9. Illégal -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">09</span>
+          <span>Illégal</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Les groupes illégaux doivent :</p>
+        <ul>
+          <li>Respecter le FearRP.</li>
+          <li>Respecter le PainRP.</li>
+          <li>Respecter les sommations.</li>
+          <li>Ne pas braquer sans raison RP.</li>
+        </ul>
+        <p style="margin-top: 10px;"><em>Les prises d'otages doivent rester réalistes.</em></p>
+      </div>
+    </details>
+
+    <!-- 10. Braquages -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">10</span>
+          <span>Braquages</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Interdictions :</p>
+        <ul>
+          <li>Braquer les nouveaux joueurs.</li>
+          <li>Braquer sans raison RP.</li>
+          <li>Tuer sans sommation.</li>
+          <li>Braquer uniquement pour l'argent.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 11. Véhicules -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">11</span>
+          <span>Véhicules</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Interdiction de :</p>
+        <ul>
+          <li>CarKill volontaire.</li>
+          <li>Faire des cascades irréalistes.</li>
+          <li>Rouler comme dans GTA Online.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 12. Armes -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">12</span>
+          <span>Armes</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <ul>
+          <li>Toujours privilégier le RP.</li>
+          <li>Les armes ne sont pas une solution à tous les problèmes.</li>
+          <li>Les sommations sont obligatoires lorsque la situation le permet.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 13. Nouveaux joueurs -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">13</span>
+          <span>Nouveaux joueurs</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Les nouveaux joueurs doivent être aidés.</p>
+        <p style="margin-top: 8px;"><em>Tout abus envers eux sera sanctionné.</em></p>
+      </div>
+    </details>
+
+    <!-- 14. Cheats -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">14</span>
+          <span>Cheats</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <p>Tolérance zéro concernant :</p>
+        <ul>
+          <li>Mod Menu</li>
+          <li>Trigger</li>
+          <li>AimBot</li>
+          <li>ESP</li>
+          <li>NoClip</li>
+          <li>Duplication</li>
+          <li>Exploit</li>
+          <li>Bug Abuse</li>
+        </ul>
+        <div class="sanction-box">
+          <i class="fa-solid fa-circle-exclamation"></i> Sanction : Bannissement permanent.
+        </div>
+      </div>
+    </details>
+
+    <!-- 15. Staff -->
+    <details>
+      <summary>
+        <div class="acc-title">
+          <span class="acc-num">15</span>
+          <span>Staff</span>
+        </div>
+        <span class="plus-icon">+</span>
+      </summary>
+      <div class="acc-content">
+        <ul>
+          <li>Le staff possède toujours le dernier mot.</li>
+          <li>Toute contestation doit passer par un ticket Discord.</li>
+          <li>Le manque de respect envers le staff pourra entraîner une sanction.</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+
+</body>
+</html>
+

@@ -1,0 +1,15 @@
+{
+  "name": "urgence-lilloise",
+  "version": "1.0.0",
+  "description": "Site web Urgence Lilloise — Semi FivePD",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
