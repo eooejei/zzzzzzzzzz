@@ -291,29 +291,31 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
     }
 
     .product-card {
-      background: rgba(10, 12, 18, 0.95);
+      background: linear-gradient(180deg, rgba(14, 17, 26, 0.98), rgba(10, 12, 18, 0.96));
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
+      border-radius: 22px;
       overflow: hidden;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(229,45,72,0.35);
+      transform: translateY(-6px);
+      border-color: rgba(229,45,72,0.4);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.45);
     }
 
     .product-image {
-      height: 180px;
+      position: relative;
+      height: 220px;
       overflow: hidden;
-      background: rgba(255,255,255,0.02);
     }
 
     .product-image img {
@@ -321,70 +323,95 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,7,13,0.8), rgba(5,7,13,0.08));
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 2;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(229,45,72,0.9);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .product-body {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      flex: 1;
+      padding: 22px;
     }
 
     .product-body h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
+      font-size: 1.35rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .product-body p {
-      color: #8f92a1;
-      font-size: 0.9rem;
-      line-height: 1.55;
+      color: #a0a8b6;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
 
-    .offer-list {
+    .offers {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
+      gap: 12px;
     }
 
-    .offer-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-      padding: 12px;
+    .offer-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
     }
 
-    .offer-item span {
+    .offer-row span {
       color: #c8cfdb;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 700;
     }
 
-    .price {
+    .offer-row strong {
+      color: #fff;
       font-size: 0.95rem;
       font-weight: 900;
-      color: #ffffff;
-      white-space: nowrap;
     }
 
     .btn-add {
-      background: rgba(46, 213, 115, 0.1);
+      background: linear-gradient(135deg, rgba(46, 213, 115, 0.12), rgba(46, 213, 115, 0.18));
       color: #2ed573;
-      border: 1px solid rgba(46, 213, 115, 0.3);
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 800;
+      border: 1px solid rgba(46, 213, 115, 0.28);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 900;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      white-space: nowrap;
-      width: 100%;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
     }
 
     .btn-add:hover {
@@ -615,28 +642,20 @@
       <div class="products-grid">
         <div class="product-card">
           <div class="product-image">
-            <img src="https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?format=webp&quality=lossless" alt="VIP Custom">
+            <img src="images/vip-custom.jpg" alt="VIP Custom">
+            <div class="product-badge">VIP</div>
           </div>
           <div class="product-body">
             <h3>VIP Custom</h3>
             <p>Un VIP personnalisé pour profiter d'avantages exclusifs sur le serveur.</p>
-            <div class="offer-list">
-              <div class="offer-item">
-                <span>2 semaines</span>
-                <div class="price">5,00 €</div>
-              </div>
+            <div class="offers">
+              <div class="offer-row"><span>2 semaines</span><strong>5,00 €</strong></div>
               <button class="btn-add" data-name="VIP Custom — 2 semaines" data-price="5">Ajouter — 2 semaines</button>
 
-              <div class="offer-item">
-                <span>1 mois</span>
-                <div class="price">10,00 €</div>
-              </div>
+              <div class="offer-row"><span>1 mois</span><strong>10,00 €</strong></div>
               <button class="btn-add" data-name="VIP Custom — 1 mois" data-price="10">Ajouter — 1 mois</button>
 
-              <div class="offer-item">
-                <span>Lifetime</span>
-                <div class="price">25,00 €</div>
-              </div>
+              <div class="offer-row"><span>Lifetime</span><strong>25,00 €</strong></div>
               <button class="btn-add" data-name="VIP Custom — Lifetime" data-price="25">Ajouter — Lifetime</button>
             </div>
           </div>
@@ -644,28 +663,20 @@
 
         <div class="product-card">
           <div class="product-image">
-            <img src="https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?format=webp&quality=lossless" alt="VIP Voiture">
+            <img src="images/vip-voiture.jpg" alt="VIP Voiture">
+            <div class="product-badge">VIP</div>
           </div>
           <div class="product-body">
             <h3>VIP Voiture</h3>
-            <p>Un VIP destiné aux véhicules et aux avantages liés au style de conduite / personnalisation.</p>
-            <div class="offer-list">
-              <div class="offer-item">
-                <span>2 semaines</span>
-                <div class="price">8,99 €</div>
-              </div>
+            <p>Un VIP destiné aux véhicules et à la personnalisation de ton expérience.</p>
+            <div class="offers">
+              <div class="offer-row"><span>2 semaines</span><strong>8,99 €</strong></div>
               <button class="btn-add" data-name="VIP Voiture — 2 semaines" data-price="8.99">Ajouter — 2 semaines</button>
 
-              <div class="offer-item">
-                <span>1 mois</span>
-                <div class="price">15,99 €</div>
-              </div>
+              <div class="offer-row"><span>1 mois</span><strong>15,99 €</strong></div>
               <button class="btn-add" data-name="VIP Voiture — 1 mois" data-price="15.99">Ajouter — 1 mois</button>
 
-              <div class="offer-item">
-                <span>Lifetime</span>
-                <div class="price">35,00 €</div>
-              </div>
+              <div class="offer-row"><span>Lifetime</span><strong>35,00 €</strong></div>
               <button class="btn-add" data-name="VIP Voiture — Lifetime" data-price="35">Ajouter — Lifetime</button>
             </div>
           </div>
@@ -706,7 +717,7 @@
       cartCount.textContent = cart.length;
 
       if (cart.length === 0) {
-        cartItems.innerHTML = '<p style=\"color:#a0a8b6;\">Votre panier est vide.</p>';
+        cartItems.innerHTML = '<p style="color:#a0a8b6;">Votre panier est vide.</p>';
         cartTotal.textContent = '0,00 €';
         return;
       }
@@ -715,12 +726,12 @@
       cartItems.innerHTML = cart.map((item, index) => {
         total += item.price;
         return `
-          <div class=\"cart-item\">
+          <div class="cart-item">
             <div>
               <strong>${item.name}</strong>
               <small>${formatEUR(item.price)}</small>
             </div>
-            <button class=\"remove-btn\" onclick=\"removeFromCart(${index})\">Supprimer</button>
+            <button class="remove-btn" onclick="removeFromCart(${index})">Supprimer</button>
           </div>
         `;
       }).join('');
@@ -729,43 +740,4 @@
     }
 
     function addToCart(name, price) {
-      cart.push({ name, price });
-      updateCart();
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCart();
-    }
-
-    function openCart() {
-      document.getElementById('cartModal').style.display = 'flex';
-      updateCart();
-    }
-
-    function closeCart() {
-      document.getElementById('cartModal').style.display = 'none';
-    }
-
-    function checkout() {
-      if (cart.length === 0) {
-        alert('Ton panier est vide.');
-        return;
-      }
-      window.location.href = 'https://discord.gg/ulsfpd';
-    }
-
-    document.querySelectorAll('.btn-add').forEach(button => {
-      button.addEventListener('click', () => {
-        addToCart(button.dataset.name, parseFloat(button.dataset.price));
-      });
-    });
-
-    document.getElementById('cartModal').addEventListener('click', (e) => {
-      if (e.target.id === 'cartModal') closeCart();
-    });
-
-    updateCart();
-  </script>
-</body>
-</html>
+      cart.push({
