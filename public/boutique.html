@@ -304,6 +304,7 @@
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
 
     .product-card:hover {
@@ -371,53 +372,13 @@
       margin-bottom: 18px;
     }
 
-    .offers {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .offer-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-    }
-
-    .offer-row span {
+    .product-hint {
       color: #c8cfdb;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .offer-row strong {
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 900;
-    }
-
-    .btn-add {
-      background: linear-gradient(135deg, rgba(46, 213, 115, 0.12), rgba(46, 213, 115, 0.18));
-      color: #2ed573;
-      border: 1px solid rgba(46, 213, 115, 0.28);
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      font-weight: 900;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      font-size: 0.82rem;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-    }
-
-    .btn-add:hover {
-      background: #2ed573;
-      color: #000;
-      transform: translateY(-1px);
+      letter-spacing: 1px;
+      margin-top: 10px;
+      opacity: 0.75;
     }
 
     .cart-badge {
@@ -440,7 +401,7 @@
       font-weight: 900;
     }
 
-    .cart-modal {
+    .modal {
       position: fixed;
       inset: 0;
       display: none;
@@ -448,13 +409,13 @@
       justify-content: center;
       background: rgba(0,0,0,0.82);
       backdrop-filter: blur(6px);
-      z-index: 2000;
+      z-index: 3000;
       padding: 20px;
     }
 
-    .cart-panel {
+    .modal-panel {
       width: 100%;
-      max-width: 720px;
+      max-width: 520px;
       background: rgba(12, 15, 22, 0.96);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 18px;
@@ -462,7 +423,7 @@
       overflow: hidden;
     }
 
-    .cart-header {
+    .modal-header {
       padding: 20px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
@@ -471,13 +432,13 @@
       gap: 16px;
     }
 
-    .cart-header h3 {
-      font-size: 1.25rem;
+    .modal-header h3 {
+      font-size: 1.15rem;
       font-weight: 900;
       text-transform: uppercase;
     }
 
-    .cart-close {
+    .modal-close {
       background: none;
       border: none;
       color: #a0a8b6;
@@ -485,41 +446,32 @@
       cursor: pointer;
     }
 
-    .cart-body {
+    .modal-body {
       padding: 22px 24px;
-      max-height: 60vh;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .cart-item {
+    .choice-btn {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+      transition: 0.2s;
       display: flex;
       justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: center;
     }
 
-    .cart-item:last-child {
-      border-bottom: 0;
-    }
-
-    .cart-item strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .cart-item small {
-      color: #8f92a1;
-    }
-
-    .remove-btn {
-      background: transparent;
-      border: 1px solid rgba(229,45,72,0.35);
-      color: #ff7a92;
-      padding: 8px 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 800;
+    .choice-btn:hover {
+      border-color: rgba(229,45,72,0.45);
+      background: rgba(229,45,72,0.12);
     }
 
     .cart-footer {
@@ -547,6 +499,28 @@
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 1px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cart-item:last-child {
+      border-bottom: 0;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: 1px solid rgba(229,45,72,0.35);
+      color: #ff7a92;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
     }
 
     footer {
@@ -625,7 +599,7 @@
       </h1>
 
       <p>
-        Découvre nos offres VIP et ajoute-les facilement à ton panier.
+        Clique sur un produit pour choisir la durée que tu veux.
       </p>
     </div>
   </section>
@@ -635,12 +609,12 @@
       <div class="shop-toolbar">
         <div>
           <h2>Produits disponibles</h2>
-          <p>3 offres par produit : 2 semaines, 1 mois et Lifetime.</p>
+          <p>Choisis un produit puis sélectionne sa durée.</p>
         </div>
       </div>
 
       <div class="products-grid">
-        <div class="product-card">
+        <div class="product-card" onclick="openOfferModal('VIP Custom')">
           <div class="product-image">
             <img src="images/vip-custom.jpg" alt="VIP Custom">
             <div class="product-badge">VIP</div>
@@ -648,20 +622,11 @@
           <div class="product-body">
             <h3>VIP Custom</h3>
             <p>Un VIP personnalisé pour profiter d'avantages exclusifs sur le serveur.</p>
-            <div class="offers">
-              <div class="offer-row"><span>2 semaines</span><strong>5,00 €</strong></div>
-              <button class="btn-add" data-name="VIP Custom — 2 semaines" data-price="5">Ajouter — 2 semaines</button>
-
-              <div class="offer-row"><span>1 mois</span><strong>10,00 €</strong></div>
-              <button class="btn-add" data-name="VIP Custom — 1 mois" data-price="10">Ajouter — 1 mois</button>
-
-              <div class="offer-row"><span>Lifetime</span><strong>25,00 €</strong></div>
-              <button class="btn-add" data-name="VIP Custom — Lifetime" data-price="25">Ajouter — Lifetime</button>
-            </div>
+            <div class="product-hint">Clique pour choisir une durée</div>
           </div>
         </div>
 
-        <div class="product-card">
+        <div class="product-card" onclick="openOfferModal('VIP Voiture')">
           <div class="product-image">
             <img src="images/vip-voiture.jpg" alt="VIP Voiture">
             <div class="product-badge">VIP</div>
@@ -669,29 +634,30 @@
           <div class="product-body">
             <h3>VIP Voiture</h3>
             <p>Un VIP destiné aux véhicules et à la personnalisation de ton expérience.</p>
-            <div class="offers">
-              <div class="offer-row"><span>2 semaines</span><strong>8,99 €</strong></div>
-              <button class="btn-add" data-name="VIP Voiture — 2 semaines" data-price="8.99">Ajouter — 2 semaines</button>
-
-              <div class="offer-row"><span>1 mois</span><strong>15,99 €</strong></div>
-              <button class="btn-add" data-name="VIP Voiture — 1 mois" data-price="15.99">Ajouter — 1 mois</button>
-
-              <div class="offer-row"><span>Lifetime</span><strong>35,00 €</strong></div>
-              <button class="btn-add" data-name="VIP Voiture — Lifetime" data-price="35">Ajouter — Lifetime</button>
-            </div>
+            <div class="product-hint">Clique pour choisir une durée</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="cart-modal" id="cartModal">
-    <div class="cart-panel">
-      <div class="cart-header">
-        <h3>Votre panier</h3>
-        <button class="cart-close" onclick="closeCart()">&times;</button>
+  <div class="modal" id="offerModal">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h3 id="offerTitle">Choisir une durée</h3>
+        <button class="modal-close" onclick="closeOfferModal()">&times;</button>
       </div>
-      <div class="cart-body" id="cartItems"></div>
+      <div class="modal-body" id="offerOptions"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="cartModal">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h3>Votre panier</h3>
+        <button class="modal-close" onclick="closeCart()">&times;</button>
+      </div>
+      <div class="modal-body" id="cartItems"></div>
       <div class="cart-footer">
         <div class="total-box">Total : <span id="cartTotal">0,00 €</span></div>
         <button class="checkout-btn" onclick="checkout()">Payer</button>
@@ -705,9 +671,47 @@
 
   <script>
     const cart = [];
+    let currentProduct = "";
+
+    const offers = {
+      "VIP Custom": [
+        { label: "2 semaines", price: 5 },
+        { label: "1 mois", price: 10 },
+        { label: "Lifetime", price: 25 }
+      ],
+      "VIP Voiture": [
+        { label: "2 semaines", price: 8.99 },
+        { label: "1 mois", price: 15.99 },
+        { label: "Lifetime", price: 35 }
+      ]
+    };
 
     function formatEUR(value) {
       return value.toFixed(2).replace('.', ',') + ' €';
+    }
+
+    function openOfferModal(productName) {
+      currentProduct = productName;
+      document.getElementById('offerTitle').textContent = `Choisir une durée — ${productName}`;
+      const container = document.getElementById('offerOptions');
+      container.innerHTML = "";
+
+      offers[productName].forEach((offer) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.innerHTML = `<span>${offer.label}</span><strong>${formatEUR(offer.price)}</strong>`;
+        btn.onclick = () => {
+          addToCart(`${productName} — ${offer.label}`, offer.price);
+          closeOfferModal();
+        };
+        container.appendChild(btn);
+      });
+
+      document.getElementById('offerModal').style.display = 'flex';
+    }
+
+    function closeOfferModal() {
+      document.getElementById('offerModal').style.display = 'none';
     }
 
     function updateCart() {
@@ -740,4 +744,22 @@
     }
 
     function addToCart(name, price) {
-      cart.push({
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function openCart() {
+      document.getElementById('cartModal').style.display = 'flex';
+      updateCart();
+    }
+
+    function closeCart() {
+      document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function
