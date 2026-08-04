@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recrutement — Urgence Lilloise</title>
+  <title>Recrutement — Nice Urgence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -38,7 +38,6 @@
       position: relative;
     }
 
-    /* Ambient Background Glows */
     .glow-bg {
       position: absolute;
       width: 500px;
@@ -340,7 +339,6 @@
       line-height: 1.5;
     }
 
-    /* MODAL DESIGN */
     .modal {
       position: fixed;
       inset: 0;
@@ -493,14 +491,14 @@
   <header>
     <div class="header-container">
       <a href="/" class="logo">
-        <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo">
-        Urgence <span>Lilloise</span>
+        <img src="logo.png" alt="Logo">
+        Nice <span>Urgence</span>
       </a>
       <nav>
         <a href="index.html">Accueil</a>
         <a href="recrutement.html" class="active">Recrutement</a>
         <a href="boutique.html">Boutique</a>
-        <a href="https://discord.gg/ulsfpd" target="_blank" class="btn-discord">
+        <a href="https://discord.gg/niceurgence" target="_blank" class="btn-discord">
           <i class="fa-brands fa-discord"></i> Discord
         </a>
       </nav>
@@ -510,7 +508,7 @@
   <section class="hero">
     <div class="badge"><i class="fa-solid fa-sparkles"></i> Recrutement Officiel</div>
     <h1>Rejoins <span>l'aventure Staff</span></h1>
-    <p>Participe au développement et à l'encadrement de la communauté Urgence Lilloise. Nous recherchons des personnes motivées et sérieuses.</p>
+    <p>Participe au développement et à l'encadrement de la communauté Nice Urgence. Nous recherchons des personnes motivées et sérieuses.</p>
     
     <div class="stats-bar">
       <div class="stat-item">
@@ -562,14 +560,13 @@
 
       <div class="preview-card">
         <div class="preview-content">
-          <h4>Urgence Lilloise</h4>
+          <h4>Nice Urgence</h4>
           <p>Un serveur FivePD exigeant, immersif et axé sur la qualité du Roleplay. Rejoins-nous pour faire la différence !</p>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- MODAL DE FORMULAIRE -->
   <div class="modal" id="modalOverlay">
     <div class="modal-content">
       <div class="modal-header">
@@ -624,10 +621,9 @@
   </div>
 
   <footer>
-    <p>&copy; 2026 Urgence Lilloise. Tous droits réservés. — Conçu par <span>Zouda</span></p>
+    <p>&copy; 2026 Nice Urgence. Tous droits réservés. — Conçu par <span>Zouda</span></p>
   </footer>
 
-  <!-- SCRIPT LOGIQUE INTACT -->
   <script>
     const DISCORD_WEBHOOK_URL = "VOTRE_WEBHOOK_URL_ICI";
 
@@ -652,8 +648,8 @@
       const data = Object.fromEntries(formData.entries());
 
       const embedPayload = {
-        username: "Recrutement Urgence Lilloise",
-        avatar_url: "https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png",
+        username: "Recrutement Nice Urgence",
+        avatar_url: "logo.png",
         embeds: [
           {
             title: "📩 Nouvelle Candidature Recrutement",
@@ -668,7 +664,7 @@
               { name: "🧠 Vision du rôle", value: data.roleModerateur || "Non précisé", inline: false }
             ],
             footer: {
-              text: "Urgence Lilloise — Système de recrutement"
+              text: "Nice Urgence — Système de recrutement"
             },
             timestamp: new Date().toISOString()
           }
