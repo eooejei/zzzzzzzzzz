@@ -51,17 +51,43 @@ function buildRecruitEmbed(data) {
     .setFooter({ text: "Urgence Lilloise — Recrutement" });
 }
 
-function buildPrendreButton(disabled = false) {
+function buildDecisionButtons(disabled = false, applicantId = null, poste = null) {
   return new ActionRowBuilder().addComponents(
     new ButtonBuilder()
-      .setCustomId("prendre")
-      .setLabel("Prendre")
+      .setCustomId(`accept|${applicantId || "none"}|${poste || "none"}`)
+      .setLabel("Accepter")
       .setStyle(ButtonStyle.Success)
+      .setDisabled(disabled),
+    new ButtonBuilder()
+      .setCustomId(`refuse|${applicantId || "none"}|${poste || "none"}`)
+      .setLabel("Refuser")
+      .setStyle(ButtonStyle.Danger)
       .setDisabled(disabled)
   );
 }
 
-discordClient.once("clientReady", () => {
+async function sendDecisionDM(userId, accepted, poste) {
+  try {
+    const user = await discordClient.users.fetch(userId);
+
+    if (accepted) {
+      await user.send(
+        `Bonjour <@${userId}>, vous êtes retenu pour un entretien oral. Merci de faire un ticket et de mettre une preuve de votre retenue.`
+      );
+    } else {
+      await user.send(
+        `Nous sommes désolés de vous annoncer que vous ne serez pas retenu pour votre candidature à **${poste}**.`
+      );
+    }
+
+    return true;
+  } catch (err) {
+    console.error("Impossible d'envoyer le MP :", err.message);
+    return false;
+  }
+}
+
+discordClient.once("ready", () => {
   console.log(`✅ Bot prêt : ${discordClient.user.tag}`);
 });
 
@@ -123,7 +149,7 @@ app.post("/recrutement", async (req, res) => {
         ? `${roleMentions}\n📥 Nouvelle candidature pour **${poste}**`
         : `📥 Nouvelle candidature pour **${poste}**`,
       embeds: [embed],
-      components: [buildPrendreButton(false)],
+      components: [buildDecisionButtons(false, discordId, poste)],
       allowedMentions: {
         roles: config.mentionRoleIds || []
       }
@@ -139,7 +165,11 @@ app.post("/recrutement", async (req, res) => {
 discordClient.on("interactionCreate", async (interaction) => {
   try {
     if (!interaction.isButton()) return;
-    if (interaction.customId !== "prendre") return;
+
+    const [action, applicantId, poste] = interaction.customId.split("|");
+    if (!["accept", "refuse"].includes(action)) return;
+
+    const isAccept = action === "accept";
 
     if (
       !interaction.memberPermissions?.has(PermissionsBitField.Flags.ManageMessages) &&
@@ -154,20 +184,24 @@ discordClient.on("interactionCreate", async (interaction) => {
     await interaction.deferUpdate();
 
     const oldEmbed = interaction.message.embeds[0];
-    const newEmbed = EmbedBuilder.from(oldEmbed).setColor(0x2ed573);
+    const newEmbed = EmbedBuilder.from(oldEmbed).setColor(isAccept ? 0x2ed573 : 0xe52d48);
 
     newEmbed.addFields({
-      name: "Statut",
-      value: `✅ Pris par ${interaction.user.tag}`,
+      name: "Décision",
+      value: isAccept
+        ? `✅ Acceptée par ${interaction.user.tag}`
+        : `❌ Refusée par ${interaction.user.tag}`,
       inline: false
     });
 
     await interaction.message.edit({
       embeds: [newEmbed],
-      components: [buildPrendreButton(true)]
+      components: [buildDecisionButtons(true, applicantId, poste)]
     });
+
+    await sendDecisionDM(applicantId, isAccept, poste);
   } catch (err) {
-    console.error("Erreur bouton Prendre :", err);
+    console.error("Erreur interaction button :", err);
   }
 });
 
