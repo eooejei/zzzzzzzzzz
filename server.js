@@ -5,7 +5,6 @@ const path = require("path");
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
 const Database = require("better-sqlite3");
-const paypal = require("paypal-rest-sdk");
 const {
   Client,
   GatewayIntentBits,
