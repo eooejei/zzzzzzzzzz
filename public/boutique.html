@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boutique — Urgence Lilloise</title>
+  <title>Boutique — Nice Urgence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -147,9 +147,9 @@
       position: absolute;
       inset: 0;
       background:
-        url('https://media.discordapp.net/attachments/1525200263173112018/1529295831117861006/wiwi.png?ex=6a655fbb&is=6a640e3b&hm=cf135396d2c321431e2cbf11e4793469e448ca210a13a972067362bd4e409c8e&=&format=webp&quality=lossless')
-        center/cover no-repeat;
-      opacity: 0.14;
+        url('logo.png')
+        center/220px no-repeat;
+      opacity: 0.10;
       filter: blur(2px);
       transform: scale(1.06);
     }
@@ -291,6 +291,7 @@
       position: relative;
       height: 220px;
       overflow: hidden;
+      background: rgba(255,255,255,0.03);
     }
 
     .product-image img {
@@ -375,27 +376,7 @@
       background: rgba(229,45,72,0.16);
     }
 
-    .cart-badge {
-      position: relative;
-    }
-
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ffffff;
-      color: #000;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 900;
-    }
-
-    .modal {
+    .modal, .cart-modal {
       position: fixed;
       inset: 0;
       display: none;
@@ -407,7 +388,7 @@
       padding: 20px;
     }
 
-    .modal-panel {
+    .modal-panel, .cart-panel {
       width: 100%;
       max-width: 520px;
       background: rgba(12, 15, 22, 0.96);
@@ -417,7 +398,7 @@
       overflow: hidden;
     }
 
-    .modal-header {
+    .modal-header, .cart-header {
       padding: 20px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
@@ -426,13 +407,13 @@
       gap: 16px;
     }
 
-    .modal-header h3 {
+    .modal-header h3, .cart-header h3 {
       font-size: 1.15rem;
       font-weight: 900;
       text-transform: uppercase;
     }
 
-    .modal-close {
+    .modal-close, .cart-close {
       background: none;
       border: none;
       color: #a0a8b6;
@@ -466,51 +447,6 @@
     .choice-btn:hover {
       border-color: rgba(229,45,72,0.45);
       background: rgba(229,45,72,0.12);
-    }
-
-    .cart-modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.82);
-      backdrop-filter: blur(6px);
-      z-index: 3000;
-      padding: 20px;
-    }
-
-    .cart-panel {
-      width: 100%;
-      max-width: 720px;
-      background: rgba(12, 15, 22, 0.96);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      overflow: hidden;
-    }
-
-    .cart-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .cart-header h3 {
-      font-size: 1.25rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .cart-close {
-      background: none;
-      border: none;
-      color: #a0a8b6;
-      font-size: 1.8rem;
-      cursor: pointer;
     }
 
     .cart-body {
@@ -575,6 +511,7 @@
       text-align: center;
       color: #666666;
       font-size: 0.85rem;
+      margin-top: auto;
     }
 
     footer span {
@@ -611,8 +548,8 @@
   <header>
     <div class="container header-inner">
       <a href="/" class="logo">
-        <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo Urgence Lilloise">
-        Urgence Lilloise <span>Semi FivePD</span>
+        <img src="logo.png" alt="Logo Nice Urgence">
+        Nice <span>Urgence</span>
       </a>
       <nav>
         <a href="index.html">Accueil</a>
@@ -621,7 +558,7 @@
         <button class="btn-cart" onclick="openCart()">
           <i class="fa-solid fa-cart-shopping"></i> Panier
         </button>
-        <a href="https://discord.gg/ulsfpd" target="_blank" class="btn-discord">
+        <a href="https://discord.gg/niceurgence" target="_blank" class="btn-discord">
           <i class="fa-brands fa-discord"></i> Discord
         </a>
       </nav>
@@ -633,10 +570,10 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-logo">
-        <img src="https://images-ext-1.discordapp.net/external/8aFZTPSGx86d0OrinnNccclsx-HM782VKGeEWOrsJd0/%3Fsize%3D256/https/cdn.discordapp.com/icons/1525134348842696825/2d0ad7849aa0c15ab794b22a214a4154.png?format=webp&quality=lossless" alt="Logo">
+        <img src="logo.png" alt="Logo">
       </div>
       <div class="eyebrow">BOUTIQUE OFFICIELLE</div>
-      <h1><span class="white">BOUTIQUE</span> <span class="gradient">URGENCE LILLOISE</span></h1>
+      <h1><span class="white">BOUTIQUE</span> <span class="gradient">NICE URGENCE</span></h1>
       <p>Clique sur un produit pour ouvrir le choix des durées et l’ajouter au panier.</p>
     </div>
   </section>
@@ -676,6 +613,19 @@
             <div class="product-hint">2 semaines • 1 mois • Lifetime</div>
           </div>
         </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/multipersonnage.jpg" alt="Multipersonnage">
+            <div class="product-badge">NOUVEAU</div>
+          </div>
+          <div class="product-body">
+            <h3>Multipersonnage</h3>
+            <p>Débloque le système de plusieurs personnages pour enrichir ton RP.</p>
+            <button class="btn-open-offers" onclick="openOfferModal('Multipersonnage')">Choisir une durée</button>
+            <div class="product-hint">7,99 € / semaine • 12,99 € / mois • 29,99 € / lifetime</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -705,7 +655,7 @@
   </div>
 
   <footer>
-    <p>&copy; 2026 Urgence Lilloise. Tous droits réservés. — Made by <span>Zouda</span></p>
+    <p>&copy; 2026 Nice Urgence. Tous droits réservés. — Made by <span>Zouda</span></p>
   </footer>
 
   <script>
@@ -720,6 +670,11 @@
         { label: "2 semaines", price: 8.99 },
         { label: "1 mois", price: 15.99 },
         { label: "Lifetime", price: 35 }
+      ],
+      "Multipersonnage": [
+        { label: "1 semaine", price: 7.99 },
+        { label: "1 mois", price: 12.99 },
+        { label: "Lifetime", price: 29.99 }
       ]
     };
 
@@ -776,7 +731,7 @@
         return `
           <div class="cart-item">
             <div>
-              <strong>${item.name}</strong>
+              <strong>${item.name}</strong><br>
               <small>${formatEUR(item.price)}</small>
             </div>
             <button class="remove-btn" onclick="removeFromCart(${index})">Supprimer</button>
@@ -801,7 +756,7 @@
         alert('Ton panier est vide.');
         return;
       }
-      window.location.href = 'https://discord.gg/ulsfpd';
+      window.location.href = 'https://discord.gg/niceurgence';
     }
 
     document.getElementById('offerModal').addEventListener('click', (e) => {
