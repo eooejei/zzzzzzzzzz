@@ -1,4 +1,3 @@
-nom | description [ emoji | categorie | role
 require("dotenv").config();
 
 const express = require("express");
