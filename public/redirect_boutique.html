@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Finaliser votre achat</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at top left, rgba(88, 101, 242, 0.35), transparent 35%),
+                linear-gradient(135deg, #111827, #1f2937);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            padding: 45px 30px;
+            text-align: center;
+            background: rgba(17, 24, 39, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(10px);
+        }
+
+        .discord-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            font-size: 38px;
+            font-weight: bold;
+            background: #5865f2;
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.4);
+        }
+
+        h1 {
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+
+        p {
+            margin-bottom: 28px;
+            color: #d1d5db;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .steps {
+            margin-bottom: 30px;
+            padding: 18px;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+        }
+
+        .steps div {
+            margin: 10px 0;
+            color: #e5e7eb;
+        }
+
+        .number {
+            display: inline-flex;
+            width: 25px;
+            height: 25px;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            border-radius: 50%;
+            color: #ffffff;
+            font-weight: bold;
+            background: #5865f2;
+        }
+
+        .discord-button {
+            display: inline-block;
+            padding: 15px 28px;
+            border-radius: 10px;
+            color: #ffffff;
+            background: #5865f2;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        .discord-button:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.35);
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 25px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .container {
+                padding: 35px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <div class="discord-icon">D</div>
+
+        <h1>Finalisez votre achat</h1>
+
+        <p>
+            Pour finaliser votre achat, veuillez rejoindre notre serveur Discord
+            et ouvrir un ticket auprès de notre équipe.
+        </p>
+
+        <div class="steps">
+            <div>
+                <span class="number">1</span>
+                Rejoignez notre serveur Discord.
+            </div>
+
+            <div>
+                <span class="number">2</span>
+                Ouvrez un ticket dans le salon prévu à cet effet.
+            </div>
+
+            <div>
+                <span class="number">3</span>
+                Notre équipe vous accompagnera pour finaliser votre achat.
+            </div>
+        </div>
+
+        <a
+            class="discord-button"
+            href="https://discord.gg/niceurgence"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Rejoindre le DISCORD
+        </a>
+
+        <div class="footer">
+            Merci pour votre confiance.
+        </div>
+    </main>
+
+</body>
+</html>
