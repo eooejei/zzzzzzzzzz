@@ -396,10 +396,11 @@
       border-radius: 12px;
       font-size: 0.92rem;
       font-weight: 900;
-      cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       transition: 0.2s;
+      display: inline-block;
+      text-align: center;
     }
 
     .btn-apply:hover {
@@ -438,116 +439,6 @@
       font-size: 0.93rem;
       line-height: 1.6;
       max-width: 360px;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.82);
-      backdrop-filter: blur(6px);
-      z-index: 3000;
-      padding: 20px;
-    }
-
-    .modal-panel {
-      width: 100%;
-      max-width: 680px;
-      max-height: 90vh;
-      background: rgba(12, 15, 22, 0.96);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 18px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .modal-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .modal-header h3 {
-      font-size: 1.15rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      color: #a0a8b6;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    .form {
-      padding: 22px 24px 24px;
-      overflow-y: auto;
-      max-height: calc(90vh - 70px);
-    }
-
-    .form-section-title {
-      font-size: 0.92rem;
-      font-weight: 900;
-      color: #e52d48;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin: 14px 0 10px;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      color: #d0d6e3;
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      background: #0a0a0c;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 12px;
-      color: #fff;
-      font-size: 0.92rem;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: #e52d48;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: #e52d48;
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 12px;
-      font-weight: 900;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 12px;
-    }
-
-    .btn-submit:hover {
-      background: #c02138;
     }
 
     footer {
@@ -597,10 +488,6 @@
 
       .section-box {
         padding: 22px;
-      }
-
-      .form {
-        padding: 18px;
       }
 
       .hero {
@@ -667,7 +554,7 @@
       <div class="section-title">
         <div>
           <h2>Rejoindre le staff</h2>
-          <p>Le formulaire à remplir est conservé comme avant.</p>
+          <p>Le recrutement se fait directement sur Discord.</p>
         </div>
       </div>
 
@@ -698,7 +585,9 @@
             </div>
           </div>
 
-          <button class="btn-apply" onclick="openModal('Support')">Postuler maintenant</button>
+          <a href="https://discord.gg/niceuregence" class="btn-apply" target="_blank" rel="noopener noreferrer">
+            Postuler maintenant
+          </a>
         </div>
 
         <div class="recruit-preview">
@@ -711,102 +600,8 @@
     </div>
   </div>
 
-  <div class="modal" id="modalOverlay">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <h3 id="modalTitle">Postuler</h3>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
-
-      <form id="applyForm" class="form">
-        <input type="hidden" id="roleInput" name="poste">
-
-        <div class="form-section-title">Informations Discord</div>
-        <div class="form-group">
-          <label>Pseudo Discord</label>
-          <input type="text" name="discordTag" required placeholder="Ex: ymn_0ffcl">
-        </div>
-        <div class="form-group">
-          <label>ID Discord</label>
-          <input type="text" name="discordId" required placeholder="Ex: 1525200263173112018">
-        </div>
-
-        <div class="form-section-title">Informations IRL</div>
-        <div class="form-group">
-          <label>Prénom</label>
-          <input type="text" name="prenom" required placeholder="Votre prénom">
-        </div>
-        <div class="form-group">
-          <label>Âge</label>
-          <input type="number" name="age" required placeholder="Ex: 18">
-        </div>
-        <div class="form-group">
-          <label>Vos ambitions dans notre staff</label>
-          <textarea name="ambitions" rows="2" required placeholder="Quelles sont vos ambitions ?"></textarea>
-        </div>
-
-        <div class="form-section-title">Motivation</div>
-        <div class="form-group">
-          <label>Pourquoi vous et pas un autre ?</label>
-          <textarea name="pourquoiVous" rows="3" required placeholder="Expliquez vos motivations..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Vos expériences</label>
-          <textarea name="experiences" rows="3" placeholder="Vos expériences passées..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>En quoi consiste le rôle de Support ?</label>
-          <textarea name="roleModerateur" rows="3" required placeholder="Votre vision du support..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">Envoyer ma candidature</button>
-      </form>
-    </div>
-  </div>
-
   <footer>
     <p>&copy; 2026 Nice Urgence. Tous droits réservés. — Made by <span>Zouda</span></p>
   </footer>
-
-  <script>
-    function openModal(roleName) {
-      document.getElementById('modalTitle').innerText = "Postuler au poste de " + roleName;
-      document.getElementById('roleInput').value = roleName;
-      document.getElementById('modalOverlay').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('modalOverlay').style.display = 'none';
-    }
-
-    document.getElementById('applyForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData.entries());
-
-      try {
-        const response = await fetch('/recrutement', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-          alert("✅ Candidature envoyée avec succès au staff !");
-          closeModal();
-          this.reset();
-        } else {
-          const errData = await response.json();
-          alert("❌ " + (errData.error || "Erreur lors de l'envoi de la candidature."));
-        }
-      } catch (err) {
-        alert("❌ Impossible de contacter le serveur.");
-      }
-    });
-
-    document.getElementById('modalOverlay').addEventListener('click', (e) => {
-      if (e.target.id === 'modalOverlay') closeModal();
-    });
-  </script>
 </body>
 </html>
