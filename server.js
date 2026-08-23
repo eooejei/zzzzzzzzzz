@@ -22,11 +22,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const db = new Database("db.sqlite");
 
-paypal.configure({
-  mode: process.env.PAYPAL_MODE || "sandbox",
-  client_id: process.env.PAYPAL_CLIENT_ID,
-  client_secret: process.env.PAYPAL_CLIENT_SECRET
-});
+// --- PayPal supprimé ---
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS users (
@@ -310,115 +306,11 @@ app.get("/api/me", requireAuth, (req, res) => {
   });
 });
 
-app.post("/api/create-payment", requireAuth, (req, res) => {
-  try {
-    const { amount } = req.body;
-    const user = getUserById(req.session.userId);
-    if (!user) return res.status(401).json({ error: "Non authentifié." });
-
-    const total = Number(amount);
-    if (!total || total <= 0) return res.status(400).json({ error: "Montant invalide." });
-
-    const order = db.prepare(
-      "INSERT INTO orders (userId, amount, status) VALUES (?, ?, 'pending')"
-    ).run(user.id, total);
-
-    const createPaymentJson = {
-      intent: "sale",
-      payer: { payment_method: "paypal" },
-      redirect_urls: {
-        return_url: process.env.PAYPAL_RETURN_URL,
-        cancel_url: process.env.PAYPAL_CANCEL_URL
-      },
-      transactions: [
-        {
-          item_list: {
-            items: [
-              {
-                name: "Achat Boutique Nice Urgence ",
-                sku: `order_${order.lastInsertRowid}`,
-                price: total.toFixed(2),
-                currency: "EUR",
-                quantity: 1
-              }
-            ]
-          },
-          amount: { currency: "EUR", total: total.toFixed(2) },
-          description: "Paiement boutique Nice Urgence"
-        }
-      ]
-    };
-
-    paypal.payment.create(createPaymentJson, (error, payment) => {
-      if (error) {
-        console.error(error);
-        return res.status(500).json({ error: "Erreur PayPal." });
-      }
-
-      db.prepare("UPDATE orders SET paypalOrderId = ? WHERE id = ?")
-        .run(payment.id, order.lastInsertRowid);
-
-      const approvalUrl = payment.links.find(l => l.rel === "approval_url");
-      return res.json({
-        success: true,
-        approvalUrl: approvalUrl ? approvalUrl.href : null,
-        orderId: order.lastInsertRowid
-      });
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: "Erreur serveur." });
-  }
-});
-
-app.post("/api/payment/confirm", requireAuth, async (req, res) => {
-  try {
-    const { orderId } = req.body;
-    const user = getUserById(req.session.userId);
-    const order = db.prepare(
-      "SELECT * FROM orders WHERE id = ? AND userId = ?"
-    ).get(orderId, user.id);
-
-    if (!order) return res.status(404).json({ error: "Commande introuvable." });
-    if (order.status === "paid") return res.json({ success: true, alreadyPaid: true });
-
-    db.prepare(
-      "UPDATE orders SET status = 'paid', paidAt = CURRENT_TIMESTAMP WHERE id = ?"
-    ).run(orderId);
-
-    const channel = await discordClient.channels.fetch(process.env.DISCORD_LOG_CHANNEL_ID);
-    if (channel && channel.isTextBased()) {
-      await channel.send(
-        `✅ **Paiement reçu**\n` +
-        `**Nom :** ${user.nom}\n` +
-        `**Prénom :** ${user.prenom}\n` +
-        `**ID Discord :** ${user.discordId}\n` +
-        `**Email :** ${user.email}\n` +
-        `**Commande :** #${order.id}\n` +
-        `**Montant :** ${order.amount.toFixed(2)} €`
-      );
-    }
-
-    return res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: "Erreur serveur." });
-  }
-});
-
-app.get("/payment/success", (req, res) => {
-  res.send(`
-    <h1>Paiement en attente de confirmation</h1>
-    <p>Le paiement doit être validé côté serveur.</p>
-  `);
-});
-
-app.get("/payment/cancel", (req, res) => {
-  res.send(`
-    <h1>Paiement annulé</h1>
-    <p>Tu as annulé le paiement.</p>
-  `);
-});
+// --- Routes PayPal supprimées ---
+// - /api/create-payment
+// - /api/payment/confirm
+// - /payment/success
+// - /payment/cancel
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
